@@ -6,24 +6,24 @@
   <pre>rm -rf ./.git</pre> 
 
 - 2. 삭제 후 로컬 저장소를 초기화합니다.
- <pre>git init</pre>
+   <pre>git init</pre>
  
 - 출력
  Reinitialized existing Git repository in C:/~~/.git/
  
 
 - 3. 초기화된 파일을 커밋합니다.
-<pre>
-git add .
-git commit -m 'Commit Message'
-// add + commit message
-git commit -am 'Commit Message'
-</pre>
+  <pre>
+  git add .
+  git commit -m 'Commit Message'
+  // add + commit message
+  git commit -am 'Commit Message'
+  </pre>
 
 - 4. 이후 원격 저장소 다시 연결을 처리합니다.
-<pre>
-  git remote add origin <원격 저장소 url> 
-</pre>
+  <pre>
+    git remote add origin <원격 저장소 url> 
+  </pre>
 
 - 5. 그리고 마지막으로 원격 저장소에 push 합니다.
    <pre>
