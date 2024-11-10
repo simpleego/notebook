@@ -8,7 +8,7 @@
   
  **2. 삭제 후 로컬 저장소를 초기화합니다.**
    <pre>git init</pre> 
- - 출력
+ > 출력
  Reinitialized existing Git repository in C:/~~/.git/
 
  **3. 초기화된 파일을 커밋합니다.**
