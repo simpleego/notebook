@@ -1,6 +1,22 @@
 
 # 스프링 빈 설정 파일 다루기
 
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Hi ${data}</h1>
+</body>
+</html>
+
+```
+
 > https://docs.spring.io/spring-framework/docs/
 - https://docs.spring.io/spring-framework/docs/5.2.x/spring-framework-reference/core.html#spring-core
 ## Controll 클래스 URL 매핑 설정
