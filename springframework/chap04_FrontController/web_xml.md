@@ -40,3 +40,4 @@
   </description>
 </web-app>
 ```
+![image](dispatcher_mapping_error.png)
