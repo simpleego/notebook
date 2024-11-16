@@ -3,3 +3,8 @@
 > 따라서 뷰페이지를 직접적으로 요청할 수 없도록 뷰페이지를 특정 폴더(WEB-INF)에 숨긴다.
 
 ![image](viewpage.png)
+
+- ### Controller에서 뷰설정 아래와 같이 수정한다.
+``` java
+  mv.setViewName("/WEB-INF/view/index.jsp");
+```
