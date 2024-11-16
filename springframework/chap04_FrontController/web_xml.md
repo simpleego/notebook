@@ -16,7 +16,7 @@
 ```
 ---
 - 서블릿 설정을 추가하여 dispatcher-servelt Controller가 모든 url을 받아서 처리하도록 설정한다.
-  ```xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -39,4 +39,4 @@
      Welcome to Tomcat
   </description>
 </web-app>
-  ```
+```
