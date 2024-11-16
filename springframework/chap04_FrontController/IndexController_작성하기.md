@@ -48,3 +48,15 @@ public class IndexController implements Controller{
 > Origin 서버가 대상 리소스를 위한 현재의 representation을 찾지 못했거나, 그것이 존재하는지를 밝히려 하지 않습니다.
 ![image](representation_error.png)
 
+```java
+System.out.println("index Controller"); // 여기까지 요청이 들어오는지 확인
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("data","Hello Spring MVC~~ ");
+		mv.setViewName("index.jsp");
+		
+		return mv;
+```
+![image](representation_error1.png)
+
+
