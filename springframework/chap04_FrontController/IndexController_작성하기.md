@@ -54,7 +54,7 @@ public class IndexController implements Controller{
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("data","Hello Spring MVC~~ ");
-		mv.setViewName("index.jsp");
+		mv.setViewName("index.jsp"); // 이것도 또하나의 요청이다.--> 다시 web.xml에서 요청을 검색한다.
 		
 		return mv;		
 	}	
