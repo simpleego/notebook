@@ -9,7 +9,14 @@
 	    <groupId>org.apache.tomcat</groupId>
 	    <artifactId>tomcat-api</artifactId>
 	    <version>9.0.73</version>
-	</dependency>  	
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>5.2.9.RELEASE</version>
+	</dependency>
 </dependencies>
 ```
 
