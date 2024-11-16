@@ -40,4 +40,9 @@
   </description>
 </web-app>
 ```
+
+### 에러 메시지
+```
+  [/WEB-INF/dispatcher-servlet.xml]; nested exception is java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+```
 ![image](dispatcher_mapping_error.png)
