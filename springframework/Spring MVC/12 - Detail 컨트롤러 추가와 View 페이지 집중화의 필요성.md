@@ -5,7 +5,7 @@
 ```
 ### Detail Controller 코드 작성
 ```java
-
+public class DetailController implements Controller{
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
