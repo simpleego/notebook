@@ -27,5 +27,32 @@
 </tiles-definitions>
 ```
 > 위의 설정 파일은 "/WEB-INF/tiles.xml"에 저장한다.
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="notice.list" template="/WEB-INF/view/customer/inc/layout.jsp">
+    <put-attribute name="title" value="Tiles tutorial homepage" />
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="visual" value="/WEB-INF/view/customer/inc/visual.jsp" />    
+    <put-attribute name="aside" value="/WEB-INF/view/customer/inc/aside.jsp" />
+    <put-attribute name="body" value="/WEB-INF/view/customer/notice/list.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+  </definition>
+  
+  <definition name="notice.detail" template="/WEB-INF/view/customer/inc/layout.jsp">
+     <put-attribute name="title" value="Tiles tutorial homepage" />
+    <put-attribute name="header" value="/WEB-INF/view/inc/header.jsp" />
+    <put-attribute name="visual" value="/WEB-INF/view/customer/inc/visual.jsp" />    
+    <put-attribute name="aside" value="/WEB-INF/view/customer/inc/aside.jsp" />
+    <put-attribute name="body" value="/WEB-INF/view/customer/notice/detail.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/view/inc/footer.jsp" />
+  </definition>
+  
+</tiles-definitions>
+```
+
 
 
