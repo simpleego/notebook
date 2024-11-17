@@ -10,3 +10,8 @@
     	<property name="suffix" value=".jsp"></property>
 </bean>
 ```
+
+## Controller Code 수정
+```java
+ModelAndView mv = new ModelAndView("index");
+```
