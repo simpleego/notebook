@@ -12,3 +12,16 @@
   <property name="definitions" value="/WEB-INF/tiles.xml"/>
 </bean>
 ```
+
+## 에러 처리
+```
+ java.lang.NoClassDefFoundError: javax/servlet/jsp/jstl/core/Config
+```
+> jstl 관련 클래스가 없으므로 관련 설정을 추가한다.
+```xml
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+```
