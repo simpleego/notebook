@@ -19,14 +19,12 @@ CategoryId=50993은
 결과는 json형식으로, api버전은 20131101년걸로, 
 카테고리는 50993(2000년대 이후 한국소설)으로 된 데이터를 요청한 것인데요. 
 이러한 요청 변수들은 사이사이 &으로 이어주면 다른 서버에 한꺼번에 묶여서 요청이 갈 수 있어요.
-
 '''
 
 #키와 url 정의
 key = "ttbsimpleego1150001"
 url = f"http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey={key}&QueryType=ItemNewAll&MaxResults=300" \
-      "&start=1&SearchTarget=Book&output=js&Version=20131101&CategoryId=8467"
-      
+      "&start=1&SearchTarget=Book&output=js&Version=20131101&CategoryId=8467"      
       
 #request 보내기
 response = requests.get(url)
@@ -41,8 +39,6 @@ print(response_json['item'][0]['priceSales'])
 item_list = response_json['item']
 
 print(len(item_list))
-
-
 title_list = []
 for i in range(len(item_list)):
     title = item_list[i]['title']
@@ -53,5 +49,4 @@ count=0
 for i in title_list:
     count+=1
     print(count,': ',i)
-
 ```
