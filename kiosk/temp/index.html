@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커피 주문기</title>
+    <style>
+        #container {
+            width: 900px;
+            height: 800px;
+            margin: 60px auto;
+            padding: 0px;
+            border: 10px solid #eee;
+        }
+
+        #title {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            top: -70px;
+            left: 350px;
+            border: 5px solid #825b07;
+            border-radius: 10px;
+            background-color: #b58d08;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #coffees {
+            width: 650px;
+            margin: 0px auto;
+            position: relative;
+            top: -80px;
+        }
+
+        .coffee {
+            width: 150px;
+            float: left;
+            /* display: inline-block; */
+            padding: 10px;
+            margin: 20px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            background-color: #ddd;
+            text-align: center;
+        }
+
+        .coffee img {
+            border-radius: 10px;
+            border: 2px solid #825708;
+        }
+
+        #cart {
+            clear: both;
+            display: none;
+            overflow: hidden;
+            width: 95%;
+            margin: 10px auto;
+            padding: 10px;
+            height: 300px;
+            border: 10px solid #e4e6e7;
+            background-color: rgb(220, 241, 242);
+        }
+
+        #cartList {
+            float: right;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="title"> 커피 주문기</h1>
+        <div id="coffees">
+            <div class="coffee">
+                <a href="detail/americano.html">
+                    <img src="images/americano.jfif" width="100" height="110">
+                </a>
+                <p>아메리카노</p>
+                <p>가격 : <span class="price">2,300</span>원</p>
+                <p>수량 : <span>20개</span></p>
+                <button id="btnAmericano">주문</button>
+            </div>
+            <div class="coffee">
+                <a href="detail/latte.html">
+                    <img src="images/latte.jfif" width="100" height="110">
+                </a>
+                <p>라떼</p>
+                <p>가격 : <span class="price">2,500</span>원</p>
+                <p>수량 : <span>20개</span></p>
+                <button id="btnLatte">주문</button>
+            </div>
+            <div class="coffee">
+                <a href="detail/moca.html">
+                    <img src="images/moca.jfif" width="100" height="110">
+                </a>
+                <p>모카</p>
+                <p>가격 : <span class="price">3,000</span>원</p>
+                <p>수량 : <span>20개</span></p>
+                <button id="btnMoca">주문</button>
+            </div>
+        </div>
+
+        <div id="cart">
+            <div id="cartList">
+                <ul id="cartItem">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    function loadMenu() {
+        // 서버로 부터 상품 정보를 
+        // 가져와서 화면에 표시
+    }
+    function showMenu() {
+        alert("모카커피 선택")
+    }
+
+    // 주만상품 리스트
+    orders = [
+        { "amount": 1, "price": 0, "total_price": 0 },
+        { "amount": 1, "price": 0, "total_price": 0 },
+        { "amount": 1, "price": 0, "total_price": 0 }
+    ]
+
+    coffee_index = { '아메리카노': 0, "라떼": 1, "모카": 2 }
+    coffee_id = { '아메리카노': "americano", "라떼": "latte", "모카": "moca" }
+
+    btnAmericanoClicked = false;
+    btnLatteClicked = false;
+    btnMocaClicked = false;
+
+    // 버튼 객체 생성
+    const btnAmericano = document.querySelector("#btnAmericano")
+    const btnLatte = document.querySelector("#btnLatte")
+    const btnMoca = document.querySelector("#btnMoca")
+
+    // 아메리카노 메뉴 처리
+    btnAmericano.addEventListener('click', (e) => {
+        menu = e.target.parentElement.querySelector(".coffee p").innerHTML
+        price = e.target.parentElement.querySelector(".price").innerHTML
+        cart = document.querySelector("#cart")
+        cart.style.display = 'block'
+        price = price.replace(',', '')
+        if (!btnAmericanoClicked) {
+            btnAmericanoClicked = true
+            order(menu, price)
+        } else {
+            alert('이미 주문되었습니다 수량으로 조정하세요!!')
+        }
+    });
+
+    // 라떼 메뉴 처리
+    btnLatte.addEventListener('click', (e) => {
+        menu = e.target.parentElement.querySelector(".coffee p").innerHTML
+        price = e.target.parentElement.querySelector(".price").innerHTML
+        cart = document.querySelector("#cart")
+        cart.style.display = 'block'
+        price = price.replace(',', '')
+        if (!btnLatteClicked) {
+            order(menu, price)
+            btnLatteClicked = true
+        } else {
+            alert('이미 주문되었습니다 수량으로 조정하세요!!')
+        }
+    });
+
+    // 모카 메뉴 처리
+    btnMoca.addEventListener('click', (e) => {
+        menu = e.target.parentElement.querySelector(".coffee p").innerHTML
+        price = e.target.parentElement.querySelector(".price").innerHTML
+        cart = document.querySelector("#cart")
+        cart.style.display = 'block'
+        price = price.replace(',', '')
+        if (!btnMocaClicked) {
+            order(menu, price)
+            btnMocaClicked = true
+        } else {
+            alert('이미 주문되었습니다 수량으로 조정하세요!!')
+        }
+    });
+
+    function order(menu, price) {
+
+        //amount = 1; //document.getElementById("amount").innerHTML
+        //total_price_ = 0
+        index = coffee_index[menu]
+        //orders[index]['amount'] = price
+        //orders[index]['total_price'] = price
+        orders[index]['price'] = price
+        amount = 1
+        total_price_ = 0
+        del_id = coffee_id[menu]
+
+        item = `
+           <span id="menu">${menu}</span>(<span id="price">${price}</span>원)
+                수량 : <button id="up" on>+</button>
+                <span id="amount">${amount}</span>
+                <button id="down">-</button>
+                금액 : <input type="text" id="total_price" value=${total_price_} readonly>
+            <button id="${del_id}">삭제</button>`
+
+        const cartItem = document.querySelector("#cartItem")
+        //const orderItem = document.createElement( 'li' )
+        const item1 = document.createElement("li");
+        item1.innerHTML = item
+        document.getElementById("cartItem").appendChild(item1);
+        //document.querySelector("#cartItem").appendChild(item);
+        //document.write(item)            
+        //price = document.getElementById("price").innerHTML
+
+        up_button = document.querySelector("#up")
+        up_button.addEventListener('click', () => {
+            // amount 값을 증가
+            amount = document.getElementById("amount").innerHTML
+            amount++
+            if (amount > 10) {
+                amount = 10
+                alert('수량은 10개까지 가능합니다.')
+            }
+            document.getElementById("amount").innerHTML = amount
+
+            total_price_ = price * amount
+            document.getElementById("total_price").value = total_price_
+        });
+
+
+        down_button = document.querySelector("#down")
+        down_button.addEventListener('click', () => {
+            // amount 값을 감소
+            amount = document.getElementById("amount").innerHTML
+            amount--
+            if (amount == 0) {
+                amount = 1
+                alert('수량은 1이상 이어야 합니다.')
+            }
+            document.getElementById("amount").innerHTML = amount
+
+            total_price_ = price * amount
+            console.log('**' + total_price_)
+            document.getElementById("total_price").value = total_price_
+        });
+
+        // 주문 삭제 버튼 기능
+        del_id = '#' + del_id
+        console.log('-->' + del_id)
+        noOrder = document.querySelector(del_id)
+        console.log('-->' + noOrder)
+        noOrder.addEventListener('click', (e) => {
+            // 아메리카로 버튼 스타일에서 disabled 기능 삭제
+            liElement = e.target.parentElement
+            liElement = document.querySelector("#menu").innerText
+            //liElement = liElement.substring(0,liElement.indexOf('('))
+            console.log('>>>' + liElement)
+            let yn = prompt('정말삭제 하시겠습니까?', 'y')
+            if (yn === 'y') {
+                e.target.parentElement.remove()
+
+                // 버튼 주문 카운트 초기화
+                console.log('menu' + menu)
+                switch (menu) {
+                    case '아메리카노': 
+                        btnAmericanoClicked = false
+                        break                    
+                    case '라떼': 
+                        btnLatteClicked = false
+                        break                    
+                    case '모카': 
+                        btnMocaClicked =  false
+                        break                    
+                }
+            }
+        });
+
+        total_price = price * amount
+        document.getElementById("total_price").value = total_price
+
+        console.log(price * amount)
+    }
+</script>
+
+</html>

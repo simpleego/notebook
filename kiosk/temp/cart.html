@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 기능</title>
+</head>
+<body>
+    <p>아메리카노(<span id="price">2000</span>원)  
+       수량 : <button id="up" on>+</button>
+       <span id="amount">1</span>
+       <button id="down">-</button>
+       금액 : <input type="text" id="total_price" value="0" readonly></p>
+</body>
+<script>
+    price = document.getElementById("price").innerHTML
+    amount = document.getElementById("amount").innerHTML
+
+    up_button = document.querySelector("#up")
+    up_button.addEventListener('click', () => {
+        // amount 값을 증가
+        amount = document.getElementById("amount").innerHTML
+        amount++
+        if(amount > 10){
+            amount = 10
+            alert('수량은 10개까지 가능합니다.')
+        }
+        document.getElementById("amount").innerHTML = amount
+
+        total_price = price * amount
+        document.getElementById("total_price").value = total_price
+    });
+
+
+    down_button = document.querySelector("#down")
+    down_button.addEventListener('click', () => {
+   		// amount 값을 감소
+        amount = document.getElementById("amount").innerHTML
+        amount--
+        if (amount == 0){
+            amount = 1
+            alert('수량은 1이상 이어야 합니다.')
+        }
+        document.getElementById("amount").innerHTML = amount
+
+        total_price = price * amount
+        document.getElementById("total_price").value = total_price
+    });
+
+    total_price = price * amount
+    document.getElementById("total_price").value = total_price
+    
+    console.log(price*amount)
+
+
+</script>
+</html>

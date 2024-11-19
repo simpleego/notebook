@@ -1,0 +1,25 @@
+        #wrapper {
+            width: 600px;
+            margin: 0 auto;
+            border: 10px solid #ddd;
+            padding: 10px;
+        }
+
+        .img {
+            float: left;
+            padding: 20px;
+        }
+
+        .coffee {
+            width: 550px;
+            margin-left: 20px;
+            padding: 1em;
+            background-color: #eee;
+        }
+
+        a {
+            clear: both;
+            position: relative;
+            left: 550px;
+            bottom: 10px;
+        }
