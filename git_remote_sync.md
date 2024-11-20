@@ -80,59 +80,57 @@ $git push origin 브랜치이름
 
 ![image](git_flow.png)
 
-#1 왼쪽에 working area, staging area, repository는 파일들이 저장되는 장소입니다.
+## 1. 왼쪽에 working area, staging area, repository는 파일들이 저장되는 장소입니다.
 
-working area(working directory)는 현재 눈에 보이는 디렉토리입니다. 뒤에 branch 설명에 나오겠지만, 특정 버전에 checkout한 상태라고 합니다.
-
-staging area는 local repository에 올리기 전에 원하는 파일들을 선택하여 스냅샷을 만들고 담아두는 곳입니다. 
-
+> working area(working directory)는 현재 눈에 보이는 디렉토리입니다. 뒤에 branch 설명에 나오겠지만, 특정 버전에 checkout한 상태라고 합니다.
+> staging area는 local repository에 올리기 전에 원하는 파일들을 선택하여 스냅샷을 만들고 담아두는 곳입니다. 
 위 사진에서 repository는 local repository를 말합니다. 원격 저장소로 올리기 전, 로컬에서 마지막으로 저장되는 곳입니다.
 ​
 
-#2 오른쪽은 파일의 상태를 나타내는 그림입니다.
+## 2. 오른쪽은 파일의 상태를 나타내는 그림입니다.
 
-Untracked은 tracked file을 제외한 파일을 말합니다. tracked file은 관리 대상인 파일이라는 의미로 git이 이미 알고 있는 파일(unmodified, modified, staged)을 말합니다.
+> Untracked은 tracked file을 제외한 파일을 말합니다. tracked file은 관리 대상인 파일이라는 의미로 git이 이미 알고 있는 파일(unmodified, modified, staged)을 말합니다.
 
-modified는 수정한 파일을 아직 로컬에 커밋하지 않았음을 의미합니다. 
+> modified는 수정한 파일을 아직 로컬에 커밋하지 않았음을 의미합니다. 
 
-staged는 현재 수정한 파일을 곧 커밋할 것이라고 표시한 상태를 의미합니다. 즉 add를 거친 파일입니다. ​
+> staged는 현재 수정한 파일을 곧 커밋할 것이라고 표시한 상태를 의미합니다. 즉 add를 거친 파일입니다. ​
 
-commit된 내용을 원격 저장소에 올리기 위해선 push를 사용하여야 합니다.
+> commit된 내용을 원격 저장소에 올리기 위해선 push를 사용하여야 합니다.
 
-간단히 말하자면 add - commit - push 순이라고 할 수 있겠습니다.
+> 간단히 말하자면 add - commit - push 순이라고 할 수 있겠습니다.
 ​
 
-push와 pull에 대한 설명을 해보겠습니다. branch 관련 내용은 다음 게시글에 있습니다. 만약 따로 branch를 생성하지 않았다면 master입니다. 원격 저장소의 branch는 그 사이트에 직접 가서 알 수도 있고, (원격저장소를 추가한 상황이라면) $git branch -r 명령어로도 원격 저장소의 브랜치 리스트를 조회할 수 있습니다.
-```
-#3 git push
-```
+> push와 pull에 대한 설명을 해보겠습니다. branch 관련 내용은 다음 게시글에 있습니다. 만약 따로 branch를 생성하지 않았다면 master입니다. 원격 저장소의 branch는 그 사이트에 직접 가서 알 수도 있고, (원격저장소를 추가한 상황이라면) $git branch -r 명령어로도 원격 저장소의 브랜치 리스트를 조회할 수 있습니다.
 
-git push는 로컬 저장소의 내용을 원격 저장소로 보내는 것인데 크게 두 가지 사용 방법이 있습니다.​
+## 3. git push
+
+> git push는 로컬 저장소의 내용을 원격 저장소로 보내는 것인데 크게 두 가지 사용 방법이 있습니다.​
+> 
 ```
 ﻿$git push $git push origin 브랜치이름
 ```
-첫번째 $git push는 로컬의 변경된 모든 내용 중 매칭되는 branch만 원격 저장소에 push하는 명령입니다.
+- 첫번째 $git push는 로컬의 변경된 모든 내용 중 매칭되는 branch만 원격 저장소에 push하는 명령입니다.
 
-두번째 $git push origin master는 원격 저장소의 master branch(브랜치이름)에 push하는 명령입니다. 원격저장소에 master라는 branch가 존재하지 않은 경우 그 이름의 branch를 새로 생성하여 push해줍니다. 그러므로 원격 저장소 branch와 local의 branch명이 같아야 합니다.
+- 두번째 $git push origin master는 원격 저장소의 master branch(브랜치이름)에 push하는 명령입니다. 원격저장소에 master라는 branch가 존재하지 않은 경우 그 이름의 branch를 새로 생성하여 push해줍니다. 그러므로 원격 저장소 branch와 local의 branch명이 같아야 합니다.
 
-원격 저장소와 로컬 저장소의 브랜치 리스트를 확인하고 싶을 땐 다음과 같이 입력합니다.
+> 원격 저장소와 로컬 저장소의 브랜치 리스트를 확인하고 싶을 땐 다음과 같이 입력합니다.
+
 ```
 ﻿$git branch -a
  ```
 remotes/~~~~로 나온게 원격저장소의 브랜치이고 나머지는 로컬의 브랜치입니다.​
-```
-#4 git pull
-```
 
-git pull은 원격 저장소의 코드를 가져와서 로컬에 합쳐주는 역할을 합니다.
+## 4. git pull
+
+> git pull은 원격 저장소의 코드를 가져와서 로컬에 합쳐주는 역할을 합니다.
+
 ```
 ﻿$git pull origin $git pull origin 브랜치이름
 ```
-첫번째 $git pull origin은 자동으로 origin의 master branch를 받아오는 거고
+- 첫번째 $git pull origin은 자동으로 origin의 master branch를 받아오는 거고
 
-두번째 $git pull origin f1은 origin의 f1 branch(이름은 임의로 설정함)를 받아오는 것입니다.
+- 두번째 $git pull origin f1은 origin의 f1 branch(이름은 임의로 설정함)를 받아오는 것입니다.
 
-지금 현재 master branch에 있고 두번째 명령를 입력하면 내 master branch에 origin의 f1 branch를 받아와서 합치는 것입니다
-
+> 지금 현재 master branch에 있고 두번째 명령를 입력하면 내 master branch에 origin의 f1 branch를 받아와서 합치는 것입니다.
 만약 내 f1 branch에 합치고 싶다면 f1 branch로 checkout해주고 두번째 명령을 입력해주면 됩니다.
 
