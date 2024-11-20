@@ -83,7 +83,7 @@ $git push origin 브랜치이름
 
 > 파일 영역의 라이프 사이클, add와 commit, push
 
-![image](https://mblogthumb-phinf.pstatic.net/MjAyMDA4MzBfMjA0/MDAxNTk4NzI2OTA5MDEy.mIa9OXSbFkPNcTiaRhrLqHbOIHVxaXJFCS9ew_rkar4g.Zlgc-FTrL5MRLIDPZ4QWDgtf0FrxkzEvePjKfcGAd2og.PNG.developer1248/%EA%B7%B8%EB%A6%BC1.png?type=w800)
+![image](git_flow.png)
 
 #1 왼쪽에 working area, staging area, repository는 파일들이 저장되는 장소입니다.
 
