@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        #wrapper {
+            position: relative;
+            width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 10px solid #eee;
+            border-radius: 20px;
+            padding-top: 50px;
+        }
+
+        #wrapper>p {
+            position: absolute;
+            top: -60px;
+            width: 200px;
+            left: 200px;
+            padding: 10px 50px;
+            border: 3px solid #aaa;
+            background-color: #ddd;
+            font-size: 1.5em;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        ul {
+            margin-top: 90px;
+            width: 590px;
+            list-style: none;
+            font-size: 1.2em;            
+            margin: 0px auto;
+        }
+
+        ul li {
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: rgb(224, 227, 227);
+            margin: 10px;
+            padding-left: 100px;
+        }
+
+        button {
+            padding: 5 10px;
+            margin: 10px;
+        }
+        .coffee {
+            clear: both;
+            overflow: hidden;
+        }
+
+        .coffee img {
+            float: left;
+            margin-top: 20px;
+        }
+
+        .products {
+            float: left;
+            border: 1px solid #f00;
+            height: 100%;
+            margin-left: 60px;
+            background-color: #eee;
+            padding: 20px;
+            border: 5px solid #aaa;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <p>상품 수량 조절</p>
+        <ul>
+            <li class="coffee">
+                <img src="images/americano.png">
+                <div class="products">
+                    <p>커피 : <span>아메리카노</span></p>
+                    <p>가격 : <span class="price">1200</span>원</p>
+                    <p>수량 :
+                        <button class="up">+</button><span class="amount">1</span>
+                        <button class="down">-</button>
+                    </p>
+                    <p>금액 : <span class="total_price"></span>원</p>
+                </div>
+            </li>
+            <li class="coffee">
+                <img src="images/latte.png" height="200">
+                <div class="products">
+                    <p>커피 : <span>라떼</span></p>
+                    <p>가격 : <span class="price">1300</span>원</p>
+                    <p>수량 :
+                        <button class="up">+</button><span class="amount">1</span>
+                        <button class="down">-</button>
+                    </p>
+                    <p>금액 : <span class="total_price"></span>원</p>
+                </div>
+            </li>
+            <li class="coffee">
+                <img src="images/moka.png" height="200">
+                <div class="products">
+                    <p>커피 : <span>모카</span></p>
+                    <p>가격 : <span class="price">1500</span>원</p>
+                    <p>수량 :
+                        <button class="up">+</button><span class="amount">1</span>
+                        <button class="down">-</button>
+                    </p>
+                    <p>금액 : <span class="total_price"></span>원</p>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</body>
+<script src="js/order.js">
+</script>
+</html>
