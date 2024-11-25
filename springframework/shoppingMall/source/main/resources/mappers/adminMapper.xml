@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kubg.mappers.adminMapper">
+    
+	<!-- 카테고리 호출 -->
+	<select id="category" resultType="com.kubg.domain.CategoryVO">
+		select
+			level, cateName, cateCode, cateCodeRef
+		from goods_category
+	    	start with cateCodeRef is null connect by prior cateCode = cateCodeRef
+	</select>
+
+	<!-- 상품 등록 -->
+	<insert id="register">
+		insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, 
+								gdsImg, gdsThumbImg)
+	   		values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+	   		 		#{gdsImg}, #{gdsThumbImg})
+	</insert>
+ 
+	<!-- 상품 목록 -->	
+	<!-- 
+	<select id="goodslist" resultType="com.kubg.domain.GoodsVO">
+		select
+			gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+	    from tbl_goods
+	        order by gdsNum desc
+	</select>
+	-->
+	
+	<select id="goodslist" resultType="com.kubg.domain.GoodsViewVO">
+		select
+		    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		    g.gdsImg, g.gdsThumbImg
+		        from tbl_goods g
+		            inner join goods_category c
+		                on g.cateCode = c.cateCode
+	</select>
+	
+	
+	
+	
+	<!-- 상품 조회 -->
+	<!-- 
+	<select id="goodsView" resultType="com.kubg.domain.GoodsVO">
+		select gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+    		from tbl_goods
+        		where gdsNum = #{gdsNum}
+	</select>
+	-->
+	
+	<!-- 상품 조회 + 카테고리 조인-->
+	<select id="goodsView" resultType="com.kubg.domain.GoodsViewVO">
+		select
+		    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		    g.gdsImg, g.gdsThumbImg
+		        from tbl_goods g
+		            inner join goods_category c
+		                on g.cateCode = c.cateCode            
+	          		where g.gdsNum = #{gdsNum}
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id="goodsModify">
+		update tbl_goods
+		    set
+		        gdsName = #{gdsName},
+		        cateCode = #{cateCode},
+		        gdsPrice = #{gdsPrice}, 
+		        gdsStock = #{gdsStock},
+		        gdsDes = #{gdsDes},
+		        
+		        gdsImg = #{gdsImg},
+		        gdsThumbImg = #{gdsThumbImg}
+		        
+		    where gdsNum = ${gdsNum}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id="goodsDelete">
+		delete
+	   		tbl_goods
+		where gdsNum = #{gdsNum}
+	</delete>
+	
+	<!-- 모든 유저의 주문 목록 -->
+	<select id="orderList" resultType="com.kubg.domain.OrderVO">
+		select 
+		    orderId, userId, orderRec,
+		    userAddr1, userAddr2, userAddr3,
+		    orderPhon, amount, orderDate, delivery
+		from tbl_order
+	</select>
+	
+	<!-- 특정 주문 목록 -->
+	<select id="orderView" resultType="com.kubg.domain.OrderListVO">
+		select 
+		    o.orderId, o.userId, o.orderRec,
+		    o.userAddr1, o.userAddr2, o.userAddr3,
+		    o.orderPhon, o.amount, o.orderDate, o.delivery,
+		    d.orderDetailsNum, d.gdsNum, d.cartStock,
+		    g.gdsName, g.gdsThumbImg, g.gdsPrice
+		from tbl_order o
+		        inner join tbl_order_details d
+		            on o.orderId = d.orderId
+		        inner join tbl_goods g
+		            on d.gdsNum = g.gdsNum
+		    where o.orderId = #{orderId}
+	</select>
+	
+	<!-- 배송 상태 -->
+	<update id="delivery">
+		update tbl_order
+	   		set delivery = #{delivery}
+		where orderId = #{orderId}
+	</update>
+	
+	<!-- 상품 수량 조절 -->
+	<update id="changeStock">
+		update tbl_goods
+	   		set gdsStock = gdsStock - #{gdsStock}
+		where gdsNum = #{gdsNum}
+	</update>
+	
+	<!-- 상품 수량 조절 보조 :: 사용하지 않음-->
+	<select id="ChangeStock_sub" resultType="com.kubg.domain.OrderDetailVO">
+		select
+			orderId, gdsNum, cartStock
+		from tbl_order_details
+    		where orderId = #{orderId}
+	</select>
+		 
+	<!--  모든 소감(댓글) -->
+	<select id="allReply" resultType="com.kubg.domain.ReplyListVO">
+		select
+		    r.gdsNum, r.userId, r.repNum, r.repCon, r.repDate,
+		    m.userName
+		from tbl_reply r
+		     inner join tbl_member m
+		        on r.userId = m.userId
+	</select>
+	
+	<!-- 소감(댓글) 지우기 -->
+	<delete id="deleteReply">
+		delete tbl_reply
+	   		where repNum = #{repNum}
+	</delete>
+		 
+		 
+</mapper>
+
+
