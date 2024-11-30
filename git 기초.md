@@ -2,12 +2,16 @@ Git은 git repository(저장소) 내의 파일들을 관리한다. 저장소는 
 
 아직 버전관리를 하지 않는 로컬 디렉토리 하나를 선택해서 Git 저장소를 적용
 GitHub에 새로운 저장소 만들어서 url 생성
+
+```git
 $ git init //.git 하위 디렉토리를 만들어 저장소에 필요한 뼈대 파일 생성 혹은 초기화
 $ git remote add origin <remote repo url> //remote repo url = origin으로 설정
 $ git remote -v
 $ git add .
 $ git commit // 파일 버전관리 시작
-$ git push -u origin main 
+$ git push -u origin main
+```
+
 다른 어딘가에서 Git 저장소를 Clone
 다른 프로젝트에 참여하거나 git repository를 복사하고 싶을 때
 $ git clone <remote repo url> //reomte repo를 로컬로 복제하기
