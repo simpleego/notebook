@@ -38,7 +38,8 @@
     })
 
 </script>
-
+```
+```html
 <main>
 	<h1>Hello {name}!</h1>
 	<!-- {#each items as item }
