@@ -1,5 +1,5 @@
-```
-App.svelte
+```js
+// App.svelte
 <script>
 	import cartItems from './cart.js'; // cartItems 자리에는 원하는 이름을 쓰면 된다.
 	export let name;
