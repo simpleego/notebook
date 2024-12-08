@@ -1,6 +1,9 @@
 # 다중쓰레드 예제
 > 10개의 쓰레드가 각각의 시험점수를 합산한다.
 > 10개의 쓰레드 합산이 끝나면 각각의 쓰레드가 구한 합계를 모두 합한다.
+>
+## 아래 코드를 위한 자바 클래스 사이트
+https://velog.io/@ssssujini99/Java-Callable-Executors-ExecutorService-%EC%9D%98-%EC%9D%B4%ED%95%B4-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EB%B2%95
 
 ```java
 import java.util.ArrayList;
