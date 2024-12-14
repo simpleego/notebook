@@ -39,7 +39,7 @@ class Main {
   }
 }
 ```
-> output
+> **output :**
 ```java
 Rendering Square...
 Rendering Circle...
@@ -53,15 +53,15 @@ render() 메서드의 주요 목적 모양을 렌더링하는 것입니다. 그�
 
 이러한 문제를 해결하기 위해 Java의 다형성을 사용하면 단일 메서드를 만들 수 있고, render() 객체의 형태에 따라 다르게 동작합니다.
 
-*Note:*
+**Note:**
 ```
 print()메서드는 다형성의 예이다. char, int, string등과 같은 다양한 유형의 데이터 값을 인쇄하는 데 사용됩니다 
 ```
   
 다음과 같은 Java Method로 다형성을 구현 할 수 있다.  
-1. Method Overriding
-2. Method Overloading
-3. Operator Overloading
+**1. Method Overriding**
+**2. Method Overloading**
+**3. Operator Overloading**
 
 ## 1. Java 메서드 재정의
 Java의 상속에서 동일한 메서드가 수퍼 클래스와 서브 클래스 모두에 존재하는 경우, 그런 다음 서브 클래스의 메서드는 수퍼 클래스의 동일한 메서드보다 우선합니다. 이것을 '**메서드 재정의**' 라고합니다.
