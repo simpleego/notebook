@@ -246,3 +246,5 @@ class Main {
 그리고 성명서에서 pl = new Java(), pl의 대상을 참조 자바수업.
 
 https://www.programiz.com/java-programming/encapsulation
+
+https://www.mygreatlearning.com/blog/polymorphism-in-java/
