@@ -59,12 +59,12 @@ print()메서드는 다형성의 예이다. char, int, string등과 같은 다�
 ```
   
 다음과 같은 Java Method로 다형성을 구현 할 수 있다.  
-**1. Method Overriding**
-**2. Method Overloading**
-**3. Operator Overloading**
+**1. Method Overriding**  
+**2. Method Overloading**  
+**3. Operator Overloading**  
 
 ## 1. Java 메서드 재정의
-Java의 상속에서 동일한 메서드가 수퍼 클래스와 서브 클래스 모두에 존재하는 경우, 그런 다음 서브 클래스의 메서드는 수퍼 클래스의 동일한 메서드보다 우선합니다. 이것을 '**메서드 재정의**' 라고합니다.
+Java의 상속에서 동일한 메서드가 수퍼 클래스와 서브 클래스 모두에 존재하는 경우, 서브 클래스의 메서드는 수퍼 클래스의 동일한 메서드보다 우선합니다. 이것을 '**메서드 재정의**' 라고합니다.
 
 이 경우 수퍼 클래스에서 동일한 메서드를 수행하고, 서브 클래스에서 다른 작업을 수행합니다.
 
@@ -102,13 +102,11 @@ Java Programming Language
 Common English Language
 ```
 
-자바 프로그래밍 언어
-공통 영어
-위의 예에서 이름이 지정된 수퍼 클래스를 만들었습니다. 언어그리고 명명 된 서브 클래스 자바. 여기, 메서드 displayInfo() 둘 다 존재한다 언어과 자바.
+위의 예에서 Language라는 수퍼 클래스와 Java라는 서브 클래스를 생성하였고, 메서드 displayInfo()를 두 개의 클래스에서 각각 갖고 있다.
 
-의 사용 displayInfo() 정보를 인쇄하는 것입니다. 그러나 다른 정보를 인쇄하고 있습니다. 언어과 자바.
+displayInfo() 메서드는 정보를 출력하는 것입니다. Language, Java클래스에서 displayInfo 메서드는 각각 다른 정보를 출력한다. 
 
-메서드를 호출하는 데 사용 된 객체를 기반으로 해당 정보가 인쇄됩니다.
+메서드를 호출하는데 사용된 객체를 기반으로 해당 정보가 인쇄됩니다.
 
 l1 객체를 사용하여 호출 할 때 j1 객체를 사용할 때 Java 프로그래밍 언어를 인쇄 할 때 displayInfo () 메서드는 공통 영어를 인쇄합니다
 자바 다형성의 작업
@@ -246,3 +244,5 @@ class Main {
 
 진술서 pl = new ProgrammingLanguage(), pl의 대상을 참조 프로그래밍 언어수업.
 그리고 성명서에서 pl = new Java(), pl의 대상을 참조 자바수업.
+
+https://www.programiz.com/java-programming/encapsulation
