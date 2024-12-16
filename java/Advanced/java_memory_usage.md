@@ -55,33 +55,24 @@ main() 메서드가 실행되기 전 JVM에서 수행하는 전처리 작업들
 
 - 2번째 줄을 실행한 상황은 위와 같습니다. 이렇게 표현되는 이유는 `main() 메서드와 T 메모리` 에서 설명했습니다.
 
-
-
-
-
+![image](https://github.com/user-attachments/assets/1b48f5f4-b96f-4f28-aed2-685f57df1b10)
 
 - ? 에는 알 수 없는 값이 들어가 있다는 뜻입니다.
 - 변수 i와 같이 선언만 하고 초기화를 하지 않은 상태에서 출력하려고 하면 자바 컴파일러(javac)는 "The local variable i may not have been initailized" 경고를 출력합니다.
 
-
-
-
-
+![image](https://github.com/user-attachments/assets/b27b4981-1854-4152-86e8-b995a5d60047)
 
 - 6번째 줄을 실행한 후 T 메모리의 상태는 위와 같습니다.
 
 
-블록 구분과 메모리: 블록 스택 프레임
-
-
+## 블록 구분과 메모리: 블록 스택 프레임
+![image](https://github.com/user-attachments/assets/36b216e1-1690-438f-b5c3-239286ddca8a)
+![image](https://github.com/user-attachments/assets/b5e3d07f-71d0-4113-ab68-c89640d1af6c)
 
 
 - `변수와 T 메모리` 에서 4번 라인까지 실행하면 T 메모리에 어떻게 저장되는지 설명하였습니다.
 - if문은 T 메모리에 어떻게 기록될까요? if 는 조건문에 따라 분기가 일어납니다. i 에 저장된 값이 10이므로 참인 블록의 스택 프레임이 만들어집니다.
-
-
-
-
+![image](https://github.com/user-attachments/assets/a52bb64a-c336-4418-8202-8b48d628936c)
 
 
 - if 블록 중 참일 떄의 블록을 종료하는 닫는 중괄호를 만나면 if 블록 스택 프레임은 스택 영역에서 사라집니다.
@@ -91,27 +82,22 @@ main() 메서드가 실행되기 전 JVM에서 수행하는 전처리 작업들
 - 다음 사실을 기억해 주세요. "외부 스택 프레임에서 내부 스택 프레임의 변수에 접근하는 것은 불가능하나 그 역은 가능하다."
 
 
-메서드 호출과 메모리: 메서드 스택 프레임
-
-
-
+## 메서드 호출과 메모리: 메서드 스택 프레임
+![image](https://github.com/user-attachments/assets/a40717b0-6c59-4336-931b-8f8da095a49c)
+![image](https://github.com/user-attachments/assets/be9c5ea7-dfcf-496a-9cd5-009af8c7a2ae)
 
 - 6번째 줄: square() 메서드를 호출합니다. 제어의 흐름이 square() 메서드가 선언된 9번째 줄로 이동할 것입니다.
 - 위의 그림은 12번째 줄의 실행을 마쳤을 때 T 메모리의 스탭샷입니다.
 - 주목해야할 것은 main() 메서드가 가진 변수 k와 square() 메서드가 가진 변수 k가 이름은 같지만 실제로는 별도의 공간에 존재한다는 것입니다. 이것을 `Call by Value(값에 의한 호출)` 이라고 합니다.
 - 따라서 square() 메서드 안의 변수에 어떠한 값을 변경하더라도 main() 메서드 안의 k 변수는 영향이 없습니다.
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/1afe53d5-94e9-492a-adba-b826cf805100)
 
 6번째 줄을 실행한 후 T 메모리 상태입니다.
 
 전역 변수와 메모리
 
-
-
+![image](https://github.com/user-attachments/assets/a0232ae9-f7b5-4896-8699-c3531bcacee4)
+![image](https://github.com/user-attachments/assets/0aa1c191-95e0-4139-90fc-f1dbf8bee879)
 
 - share 변수에 static 키워드가 붙어 있습니다.
 - share 변수는 T 메모리의 스태틱 영역에 변수 공간이 할당됩니다.
@@ -121,12 +107,10 @@ main() 메서드가 실행되기 전 JVM에서 수행하는 전처리 작업들
 - 그러나 프로젝트가 커져서 여러 메서드들이 전역 변수의 값을 변경하면 전역 변수에 어떤 값이 저장 되어 있는지 파악하기 쉽지 않습니다.
 - `Math.PI` 처럼 읽기 전용으로 값을 공유해서 전역 상수로 쓰는 것은 추천합니다.
 
+## 멀티 스레드 / 멀티 프로세스의 이해
+![image](https://github.com/user-attachments/assets/7051e485-b942-4ad0-bfdb-7e66a9e37773)
 
-멀티 스레드 / 멀티 프로세스의 이해
-
-
-
-
+![image](https://github.com/user-attachments/assets/45695551-2324-4317-b0f2-4cdae899aef4)
 
 - 멀티 스레드의 T 메모리 모델은 스택 영역을 스레드 개수만큼 분할해서 쓰는 것입니다.
 - 멀티 프로세스는 다수의 데이터 저장영역, 즉 다수의 T 메모리를 갖는 구조입니다.
