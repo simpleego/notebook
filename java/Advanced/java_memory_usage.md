@@ -3,11 +3,13 @@
 ## 도입
 > 좋은 실력을 갖춘 개발자가 되기 위해서 단순히 자기의 코드가 돌아갔다 뿐 아니라 자신의 코드가 컴퓨터 내부에서 어떻게 동작하는지를 이해해야 합니다. 본 글은 간단한 JAVA 코드가 메모리에서 어떻게 동작하는지 살펴볼 것입니다.
 
-
 ## main() 메서드와 T 메모리
+
 ![image](https://github.com/user-attachments/assets/b70dcc62-921b-4c5d-bbf8-7e75b7f609a9)
 
 - T메모리는 위와 같은 구조입니다.
+
+  
   ![image](https://github.com/user-attachments/assets/99be2c18-7029-4bac-8ec3-9f5ff2dbb23d)
 
 
@@ -67,7 +69,6 @@
 ![image](https://github.com/user-attachments/assets/36b216e1-1690-438f-b5c3-239286ddca8a)
 ![image](https://github.com/user-attachments/assets/b5e3d07f-71d0-4113-ab68-c89640d1af6c)
 
-
 - `변수와 T 메모리` 에서 4번 라인까지 실행하면 T 메모리에 어떻게 저장되는지 설명하였습니다.
 - if문은 T 메모리에 어떻게 기록될까요? if 는 조건문에 따라 분기가 일어납니다. i 에 저장된 값이 10이므로 참인 블록의 스택 프레임이 만들어집니다.
 ![image](https://github.com/user-attachments/assets/a52bb64a-c336-4418-8202-8b48d628936c)
@@ -78,7 +79,6 @@
 - 라인 20번의 주석을 해제하면 어떻게 될까요? 에러가 나올 것입니다.
 - m은 if 블록 스택 프레임이 종료되며 사라졌습니다. main이라는 외부 스택 프레임에서 내부 변수 m에는 접근 할 수 없습니다.
 - 다음 사실을 기억해 주세요. "외부 스택 프레임에서 내부 스택 프레임의 변수에 접근하는 것은 불가능하나 그 역은 가능하다."
-
 
 ## 메서드 호출과 메모리: 메서드 스택 프레임
 ![image](https://github.com/user-attachments/assets/a40717b0-6c59-4336-931b-8f8da095a49c)
