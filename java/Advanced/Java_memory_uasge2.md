@@ -86,7 +86,78 @@ public class Driver {
 ```
 [Driver.java]
 
+![image](https://github.com/user-attachments/assets/71051d0d-38ec-40ad-97cd-a8f13b35e8e8)
 
+- Penguin 클래스의 인스턴스만 힙 영역에 생기는 것이 아니라 Animal 클래스의 인스턴스도 함께 힙 영역에 생깁니다.
+- 그림에서는 생략되었지만 모든 클래스의 최상위 클래스인 Object 클래스의 인스턴스도 함께 생성됩니다.
+- pingu 객체 참조 변수가 가리키고 있는 것은 Penguin 인스턴스가 아닌 Animal 인스턴스입니다.
+- pingu 객체 참조 변수는 사실 펭귄이지만 동물이라는 것만 인식하고 있습니다.
+- 따라서 pingu 객체 참조 변수는 habitat 속성과 showHabitat() 메서드를 사용할 수 없습니다.
 
-  
+## 다형성과 T 메모리
+```java
+public class Animal {
+    public String name;
+ 
+    public void showName(){
+        System.out.println("안녕 나는 %s야.", name );
+    }
+}
+```
+[Animal.java]
 
+```java
+public class Penguin extends Animal {
+    public String habitat;
+ 
+    public void showHabitat(){
+        System.out.printf("%s는 $s에 살아", name, habitat);
+    }
+ 
+    // 오버 라이딩 - 재정의: 상위 클래스의 메서드와 같은 메서드 이름, 같은 인자 리스트
+    public void showName(){
+        System.out.println("내 이름은 비밀입니다.");
+    }
+ 
+    // 오버로딩 - 중복정의: 같은 메서드 이름, 다른 인자 리스트
+    public void showName(String yourName){
+        System.out.println("%s 안녕, 나는 $s라고 해.", yourName, name);
+    }
+}
+```
+[Penguin.java]
+
+```java 
+public class Driver {
+    public static void main(String [] args){
+        Penguin pororo = new Penguin();
+ 
+        pororo.name = "뽀로로";
+        poeoeo.habitat = "남극";
+ 
+        pororo.showName();
+        pororo.showName("초보람보");
+        pororo.showHabitat();
+ 
+        Animal pingu = new Penguin();
+        pingu.name = "핑구";
+        pingu.showName();
+    }
+}
+```
+[Driver.java]
+
+```
+어머 내 이름은 알아서 뭐하게요?
+초보람보 안녕, 나는 뽀로로라고 해
+뽀로로는 남극에 살아
+어머 내이름은 알아서 뭐하게요?
+```
+> [실행결과]
+> 위의 코드 실행 결과는 위와 같습니다.
+![image](https://github.com/user-attachments/assets/34440017-48b1-4f8f-8750-4e04152e9f73)
+
+- pororo.showName(); 부분을 실행하면 Animal 객체에 있는 showName() 메서드는 Penguin 객체에 있는 showName() 메서드에 의해 재정의, 즉 가려졌기에 Penguin 객체에서 재정의한 showName() 메서드가 호출됩니다.
+- T 메모리에서 주의해야 할 것은 pingu 객체 참조 변수는 타입이 Animal 타입이라는 것입니다.
+- Animal 객체의 showName()은 Penguin 객체의 showName()에 의해 가려져 있습니다. 따라서 17번째 줄의 pingu.showName() 메서드를 실행하면 Animal 객체에 정의된 showName() 메서드가 아닌 Penguin 객체에 의해 정의된 showName() 메서드가 실행됩니다.
+- 상위 클래스 타입의 객체 참조 변수를 사용하더라도 하위 클래스에서 오버라이딩(재정의)한 메서드가 호출됩니다.
