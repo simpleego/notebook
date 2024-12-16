@@ -155,6 +155,7 @@ public class Driver {
 ```
 > [실행결과]
 > 위의 코드 실행 결과는 위와 같습니다.
+  
 ![image](https://github.com/user-attachments/assets/34440017-48b1-4f8f-8750-4e04152e9f73)
 
 - pororo.showName(); 부분을 실행하면 Animal 객체에 있는 showName() 메서드는 Penguin 객체에 있는 showName() 메서드에 의해 재정의, 즉 가려졌기에 Penguin 객체에서 재정의한 showName() 메서드가 호출됩니다.
