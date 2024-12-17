@@ -7,7 +7,8 @@ interface Remotable {
     void turnOff();
     void turnOn();
     void volumeUp();
-    void volumeDown(); 
+    void volumeDown();
+}
 ```
 
 > Then we make all devices implement this interface.
