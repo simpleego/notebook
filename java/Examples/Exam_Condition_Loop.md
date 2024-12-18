@@ -91,7 +91,7 @@ public class Exercise4_11 {
   } // end of main
 }
 ```
-7. 구구단의 일부분을 다음과 같이 출력하시오.
+7. 구구단의 일부분을 다음과 같이 출력하시오.  
 ![image](https://github.com/user-attachments/assets/2ef298ce-1371-4dc0-9840-acf60efcffca)
 
 ```java
