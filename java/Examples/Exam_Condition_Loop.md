@@ -181,8 +181,3 @@ class Exercise10 {
     } // main
 }
 ```
-
-1. ㅓ리너리
-```java
-```
-
