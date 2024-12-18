@@ -12,8 +12,19 @@ class Exercise4_2 {
   } 
 }
 ```
-1. ㅓ리너리
+2. 1+(1+2)+(1+2+3)+(1+2+3+4)+...+(1+2+3+...+10)의 결과를 계산하는 프로그램에 알맞은 코드를 작성하시오.
 ```java
+class Exercise4_3 {
+  public static void main(String[] args) {
+    int sum = 0;
+    int totalSum = 0;
+    for(int i=1; i <=10; i++) {
+      /*       */;
+      /*        */;
+    }
+    System.out.println("totalSum="+totalSum);
+  } // main
+}
 ```
 1. ㅓ리너리
 ```java
