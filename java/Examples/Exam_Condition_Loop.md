@@ -95,7 +95,7 @@ public class Exercise4_11 {
 ![image](https://github.com/user-attachments/assets/2ef298ce-1371-4dc0-9840-acf60efcffca)
 
 ```java
-public class Exercise4_12 {
+public class Exercise7 {
   public static void main(String[] args) {
     for (int i = 1 ; i <= 9 ; i++) {
       for (int j = 1; j <= 3; j++) {
