@@ -132,7 +132,7 @@ class Exercise4 {
 두점사이의 거리 : xxx.xx
 ```
 
-## 7. 문제6에서 작성한 클래스메서드 getDistance()를 MyPoint클래스의 인스턴스메서드로 정의하시오.
+## 7. 문제6에서 작성한 클래스메서드 getDistance()를 MyPoint클래스의 인스턴스 메서드로 정의하시오.
 ```java
 class MyPoint {
     int x;
@@ -159,10 +159,3 @@ class Exercise5 {
 ```
 두점사이의 거리 : xxx.xx
 ```
-
-
-
-       
-
-
-
