@@ -3,3 +3,4 @@
   - https://www.programiz.com/java-programming/examples/print-integer
   - https://www.w3resource.com/java-exercises/datatypes/index.php
     - 문제 및 풀이가 잘 정리된 사이트
+  - https://school.programmers.co.kr/learn/challenges?order=recent&page=1&languages=java
