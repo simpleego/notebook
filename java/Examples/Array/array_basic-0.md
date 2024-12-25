@@ -45,4 +45,15 @@
 
 > 정답 사이트 - 다양한 방법으로 문제를 해결법을 제시한다.  
 > [[https://www.geeksforgeeks.org/java-program-to-find-sum-of-array-elements/](https://www.geeksforgeeks.org/java-program-for-program-to-find-largest-element-in-an-array)](https://www.geeksforgeeks.org/java-transpose-matrix)
+## 4. 아래 입출력 양식을 참고하여 배열의 위치를 키보드로 입력받은 수치만큼 왼쪽방향으로  
+   배열의 값을 이동하는 프로그램을 작성하시오.  
+   단, 배열에 값은 임의로 초기화하여 설정하고, 배열의 크기를 구해서 프로그래밍한다.  
+   **-> 추가적으로 이동할 크기를 음수값/양수값에 따라 방향을 바꾸어 이동하는 프로그램도 작성해 보면 좋을 것이다.**
+| 구분    | 데이터 예시      |
+|---------|------------------|
+| 입력 :  | [ 1, 2, 3, 4, 5, 6, 7 ] |
+| 키보드 입력 :  | 이동할 크기 : 2 |
+| 출력 :  | 3 4 5 6 7 1 2    |
 
+> 정답 사이트 - 다양한 방법으로 문제를 해결법을 제시한다.  
+> https://www.geeksforgeeks.org/java-program-for-array-rotation/
