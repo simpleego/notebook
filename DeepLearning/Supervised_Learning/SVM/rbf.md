@@ -4,6 +4,18 @@
 ![image](https://github.com/user-attachments/assets/c5557a57-31cb-4b25-9e20-7a1b3938353a)
 ![image](https://github.com/user-attachments/assets/7f9a0578-ac76-4789-83ad-01ea59684e23)
 
+![image](https://github.com/user-attachments/assets/5ed080fe-08dc-4531-9d40-9064b722e1bc)
+
+![image](https://github.com/user-attachments/assets/8c406266-53ac-4e27-9aee-f482f5bfe4fd)
+
+![image](https://github.com/user-attachments/assets/d7de3e82-4017-4e69-9e3e-659a813ae688)
+
+![image](https://github.com/user-attachments/assets/7509a57f-2906-4389-8d98-fb237ec95a99)
+![image](https://github.com/user-attachments/assets/672ef97c-a776-426f-8b40-f03b0e30c284)
+![image](https://github.com/user-attachments/assets/85651429-065e-4887-bd79-5ff69ab16689)
+![image](https://github.com/user-attachments/assets/a8c71bff-68f6-4650-bfe1-7a7f4ec6656d)
+
+
 
 
 ## rbf
