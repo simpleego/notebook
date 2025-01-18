@@ -10,4 +10,8 @@
 ## 3. Container overview( https://docs.spring.io/spring-framework/docs/4.1.9.RELEASE/spring-framework-reference/html/beans.html )
 ![image](https://github.com/user-attachments/assets/7d0b6fab-56ee-49bb-9170-61af17029c51)
 
+## 3. For information about using other forms of metadata with the Spring container, see:
+- Annotation-based configuration: Spring 2.5 introduced support for annotation-based configuration metadata.
+- Java-based configuration: Starting with Spring 3.0, many features provided by the Spring JavaConfig project became part of the core Spring Framework. Thus you can define beans external to your application classes by using Java rather than XML files. To use these new features, see the @Configuration, @Bean, @Import and @DependsOn annotations.
+
 
