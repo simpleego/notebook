@@ -15,7 +15,7 @@
 - Annotation-based configuration: Spring 2.5 introduced support for annotation-based configuration metadata.
 - Java-based configuration: Starting with Spring 3.0, many features provided by the Spring JavaConfig project became part of the core Spring Framework. Thus you can define beans external to your application classes by using Java rather than XML files. To use these new features, see the @Configuration, @Bean, @Import and @DependsOn annotations.
 
-## The following example shows the basic structure of XML-based configuration metadata:
+## 4. The following example shows the basic structure of XML-based configuration metadata:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -35,4 +35,15 @@
 
 </beans>
 ```
+
+### 4.1 Instantiating a container
+```xml
+ApplicationContext context =
+    new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
+```
+
+
+
+
+
 
