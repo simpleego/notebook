@@ -13,7 +13,39 @@
 ## 3. Container overview( https://docs.spring.io/spring-framework/docs/4.1.9.RELEASE/spring-framework-reference/html/beans.html )
 ![image](https://github.com/user-attachments/assets/7d0b6fab-56ee-49bb-9170-61af17029c51)
 
+## The DispatcherServlet
 ![image](https://github.com/user-attachments/assets/8d80ba02-598f-4452-881b-a785954ce7a7)
+```xml
+<web-app>
+    <servlet>
+        <servlet-name>example</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>example</servlet-name>
+        <url-pattern>/example/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+```
+
+```java
+public class MyWebApplicationInitializer implements WebApplicationInitializer {
+
+    @Override
+    public void onStartup(ServletContext container) {
+        ServletRegistration.Dynamic registration = container.addServlet("dispatcher", new DispatcherServlet());
+        registration.setLoadOnStartup(1);
+        registration.addMapping("/example/*");
+    }
+}
+```
+### Figure 17.2. Context hierarchy in Spring Web MVC
+![image](https://github.com/user-attachments/assets/5f4bf981-8cad-446b-a5d7-fc6b6ae631d1)
+
+
 
 
 ## 3. For information about using other forms of metadata with the Spring container, see:
