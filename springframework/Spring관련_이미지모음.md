@@ -45,6 +45,45 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
 ### Figure 17.2. Context hierarchy in Spring Web MVC
 ![image](https://github.com/user-attachments/assets/5f4bf981-8cad-446b-a5d7-fc6b6ae631d1)
 
+## Consider the following DispatcherServlet Servlet configuration (in the web.xml file):
+```xml
+<web-app>
+    <servlet>
+        <servlet-name>golfing</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>golfing</servlet-name>
+        <url-pattern>/golfing/*</url-pattern>
+    </servlet-mapping>
+</web-app>
+```
+## It is also possible to have just one root context for single DispatcherServlet scenarios by setting an empty contextConfigLocation servlet init parameter, as shown below:
+```xml
+<web-app>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/root-context.xml</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+</web-app>
+```
 
 
 
