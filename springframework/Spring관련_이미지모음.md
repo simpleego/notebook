@@ -13,6 +13,9 @@
 ## 3. Container overview( https://docs.spring.io/spring-framework/docs/4.1.9.RELEASE/spring-framework-reference/html/beans.html )
 ![image](https://github.com/user-attachments/assets/7d0b6fab-56ee-49bb-9170-61af17029c51)
 
+![image](https://github.com/user-attachments/assets/8d80ba02-598f-4452-881b-a785954ce7a7)
+
+
 ## 3. For information about using other forms of metadata with the Spring container, see:
 - XML based configureration metadata.
 - Annotation-based configuration: Spring 2.5 introduced support for annotation-based configuration metadata.
