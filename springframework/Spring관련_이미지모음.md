@@ -85,6 +85,31 @@ ApplicationContext context =
     <!-- more bean definitions for data access objects go here -->
 </beans>
 ```
+## 4.2 Composing XML-based configuration metadata
+```xml
+<beans>
+    <import resource="services.xml"/>
+    <import resource="resources/messageSource.xml"/>
+    <import resource="/resources/themeSource.xml"/>
+
+    <bean id="bean1" class="..."/>
+    <bean id="bean2" class="..."/>
+</beans>
+```
+## 4.3 Using the container
+```xml
+// create and configure beans
+ApplicationContext context =
+    new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
+
+// retrieve configured instance
+PetStoreService service = context.getBean("petStore", PetStoreService.class);
+
+// use configured instance
+List<String> userList = service.getUsernameList();
+```
+
+
 
 
 
