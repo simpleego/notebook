@@ -69,14 +69,17 @@ RNN 학습에서 기울기 소실도 큰 문제이다. 이 문제를 해결하�
 기억 셀의 특징은 데이터를 LSTM 계층 내에서만 주고받는다는 것이다. 다른 계층으로는 출력하지 않는다는 것이다. 반면, LSTM의 은닉 상태 h는 RNN 계층과 마찬가지로 다른 계층, 위쪽으로 출력된다.
 
 ### 6.2.2 LSTM 계층 조립하기
-LSTM에는 기억 셀 ct가 있다. c_t에서 시각 t에서의 LSTM의 기억이 저장돼 있는데, 과거로부터 시각 t까지의 필요한 모든 정보가 저장돼 있다고 가정한다. 그리고 필요한 정보를 모두 간직한 이 기억을 바탕으로, 외부 계층에 은닉 상태 h_t를 출력한다. 이때 출력하는 h_t는 아래 그림과 같이 기억 셀의 값을 tanh함수로 변환하 값이다.
+LSTM에는 기억 셀 ct가 있다. c_t에서 시각 t에서의 LSTM의 기억이 저장돼 있는데, 과거로부터 시각 t까지의 필요한 모든 정보가 저장돼 있다고 가정한다. 그리고 필요한 정보를 모두 간직한 이 기억을 바탕으로, 외부 계층에 은닉 상태 h_t를 출력한다. 이때 출력하는 h_t는 아래 그림과 같이 기억 셀의 값을 tanh함수로 변환한 값이다.
 ![image](https://github.com/user-attachments/assets/3280ec82-edd7-4d57-b5a1-454896efd66b)
 
 그림에서 현재의 기억 셀 c_t는 3개의 입력 (c(t-1),h_(t-1),x_t)으로부터 '어떤 계산'을 수행하여 구할 수 있다. 여기서 핵심은 갱신된 c_t를 사용해 은닉 상태 h_t를 계산한다는 것이다. 또한 이 계산은 h_t=tanh(c_t)인데, 이는 c_t의 각 요소에 tanh 함수를 적용한다는 뜻이다.
 
 '게이트'란 우리나라로 '문'을 의미하는 단어이다. 문은 열거나 닫을 수 있듯이, 게이트는 데이터의 흐름을 제어한다.
+![image](https://github.com/user-attachments/assets/175df6b6-94a5-4668-a833-130f9c25463c)
+
 
 LSTM에서 사용하는 게이트는 '열기/닫기'뿐 아니라, 어느 정도 열지를 조절할 수 있다. '어느 정도'를 '열림 상태'라 부르며 0.7(70%)이나 0.2(20%)처럼 제어할 수 있다.
+![image](https://github.com/user-attachments/assets/25844649-91f6-4950-8aae-2641d9783daf)
 
 그리고 게이트의 열림 사애는 그림에서처럼 0.0~1.0 사이의 실수로 나타나며 1.0은 완전한 개방을 의미한다. 그리고 그 값이 다음으로 흐르는 물의 양을 결정한다. 여기서 중요한 것은 '게이트를 얼마나 열까'라는 것도 데이터로부터 자동으로 학습한다는 점이다.
 
@@ -85,32 +88,41 @@ tanh(c_t)의 각 원소에 대해 '그것이 다음 시각의 은닉 상태에 �
 
 output 게이트의 열림 상태는 입력 xt와 이전 상태 h(t-1)로부터 구한다. 이때의 식은 밑에 식과 같다.
 
+![image](https://github.com/user-attachments/assets/8b9f8d8f-ecc1-43a3-9b90-b233b60f9024)
 
 밑에 그림에서 output 게이트에서 수행하는 식의 계산을 sigma로 표기했다. sigma의 출력을 o라고 하면 h_t는 o와 tanh(c_t)의 곱으로 계산된다.
+![image](https://github.com/user-attachments/assets/394f7e0b-352f-43d1-822b-50f9bb61e061)
 
 여기서 말하는 '곱'이란 원소별 곱이며, 이것을 아다마르 곱이라고 한다.
-\
+![image](https://github.com/user-attachments/assets/ae43b1aa-af3c-46f5-8529-57e164a048c9)
+
 여기까지 LSTM 의 output 게이트이고 출력 부분은 완성되었다.
 
 ## 6.2.4 forget 게이트
 다음에 해야 할 일은 기억 셀에 '무엇을 잊을까'를 명확하게 지시하는 것이다.
+![image](https://github.com/user-attachments/assets/4fc9b730-6d47-49d8-9e40-2e8faf381246)
 
 그림에서 보이는 거서럼 forget게이트가 수행하는 일련의 계산을 sigma 노드로 표기했고 이 안에는 forget 게이트 전용의 가중치 매개변수가 있고 다음 식의 계산을 수행한다.
-
+![image](https://github.com/user-attachments/assets/f4d249ce-6a35-442a-aefb-a123da8b4e66)
 
 ## 6.2.5 새로운 기억 셀
 forget 게이트를 거치며넛 이전 시각의 기억 셀로부터 잊어야 할 기억이 삭제되었다.
 
+![image](https://github.com/user-attachments/assets/d734d0bc-300a-4b1c-8b51-6aaeb573fa5d)
+
 그림에서 보듯 tanh 노드가 계산한 결과가 이전 시각의 기억 셀 c_(t-1)에 더해진다. 기억 셀에 새로운 '정보'가 추가 된 것이다. 이 tanh노드에서 수행하는 계산은 다음과 같다.
+![image](https://github.com/user-attachments/assets/1d0c5f87-60c0-4c01-a578-4532ef810243)
 
+### 6.2.6 input 게이트
+![image](https://github.com/user-attachments/assets/cd3322ff-c487-40c8-a814-cc957c605994)
 
-## 6.2.6 input 게이트
 
 마지막으로 g에 게이트를 하나 추가하여 이를 input 게이트라고 하겠다. input 게이트는 g의 원소가 새로 추가되는 정보로써의 가치가 얼마나 큰지를 판단한다. 새 정보를 무비판적으로 수용하는 게 아니라, 적절히 취사선택하는 것이 이 게이트의 역할이다. 즉, input 게이트에 의해 가중된 정보가 새로 추가되는 셈이다.
 밑의 식은 이때 수행하는 계산식이다.
+![image](https://github.com/user-attachments/assets/f07f5c51-0e49-4cdf-b2a1-f511bdfdfeb1)
 
-
-## 6.2.7 LSTM의 기울기 흐름
+### 6.2.7 LSTM의 기울기 흐름
+![image](https://github.com/user-attachments/assets/a87d94ad-1c0e-4b20-adb6-209cf6dc7961)
 
 이 구조를 보면 기억 셀에 집중하여, 그 역전파의 흐름을 그린 것이다. 이때 기억 셀의 역전파에서는 '더하기'와 '곱하기' 노드만 가지에 되고 '더하기'노드는 상류에서 전해지는 기울기를 그대로 흘려 기울기 변화(감소)는 일어나지 않는다.
 
@@ -119,7 +131,9 @@ forget 게이트를 거치며넛 이전 시각의 기억 셀로부터 잊어야 
 '곱하기'노드의 계산은 forget 게이트가 제어하며 이 게이트가 '잊어야 한다'고 판단한 기억 셀의 원소에 대해서는 그 기울기가 작아진다. 한편, forget게이트가 '잊어서는 안 된다'고 판단한 원소에 대해서는 그 기울기가 약화되지 않은 채로 과거 방향으로 전해진다. 따라서 기억 셀의 기울기가 소실 없이 전파되리라 기대할 수 있다.
 
 ## 6.3 LSTM 구현
-
+![image](https://github.com/user-attachments/assets/2b5495f8-1309-4e8b-b552-cd83dce8f38f)
+![image](https://github.com/user-attachments/assets/91b13cc7-cd3c-46ae-97f3-ef496c9d847f)
+![image](https://github.com/user-attachments/assets/871dbd1b-b946-4be2-8e57-460bfd501268)
 
 
 위 식들이 LSTM에서 수행하는 계산이고 주목할 부분은 [식 ## 6.6]의 네 수식에 포함된 아핀 변환이다. 아핀 변환을 하나도 묶은 그림이 밑에서 나타난다.
