@@ -68,7 +68,6 @@ CBOW 모델과 확률
 
 (윈도우 크기가 1인 경우)
 skip-gram 모델
-
 ![image](https://github.com/user-attachments/assets/660dc8c9-8d03-47dc-97a2-73118378bfdd)
 
 
