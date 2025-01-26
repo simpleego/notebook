@@ -132,28 +132,38 @@ forget 게이트를 거치며넛 이전 시각의 기억 셀로부터 잊어야 
 
 ## 6.3 LSTM 구현
 ![image](https://github.com/user-attachments/assets/2b5495f8-1309-4e8b-b552-cd83dce8f38f)
+
 ![image](https://github.com/user-attachments/assets/91b13cc7-cd3c-46ae-97f3-ef496c9d847f)
+
 ![image](https://github.com/user-attachments/assets/871dbd1b-b946-4be2-8e57-460bfd501268)
 
 
 위 식들이 LSTM에서 수행하는 계산이고 주목할 부분은 [식 ## 6.6]의 네 수식에 포함된 아핀 변환이다. 아핀 변환을 하나도 묶은 그림이 밑에서 나타난다.
+![image](https://github.com/user-attachments/assets/37cc9e13-5f66-4b76-ac13-7512a39e0107)
+![image](https://github.com/user-attachments/assets/757d3815-7ce1-4e7c-be0a-696765f3aa68)
+
+![image](https://github.com/user-attachments/assets/8313bbaf-cea9-46fa-9349-eaef6870d585)
 
 4개의 가중치를 하나로 모을 수 있고, 그렇게 하면 원래 개별적으로 총 4번 수행하던 아핀 변환을 단 1회의 게산으로 끝마칠 수 있다.
-
+![image](https://github.com/user-attachments/assets/1ce50661-1c7a-4d29-92e5-653adcd67aad)
 
 만약 W_x, W_h, b 각각에 4개분의 가중치가 포함되어 있다고 가정하면 위의 그림처럼 그래프가 그려진다.
-
+![image](https://github.com/user-attachments/assets/d41308f3-8ef9-4ce8-a3c5-0e369e1c0d69)
 
 [그림 6-22]에서는 미니배치 수를 N, 입력 데이터의 차원 수를 D, 기억 셀과 은닉 상태의 차원 수를 모두 H로 표시했습니다. 그리고 계산 결과인 A에는 네 개분의 아핀 변환 결과가 저장된다. 따라서 결과로 데이터를 꺼낼 때는 슬라이스 해서 꺼내고 꺼낸 데이터를 다음 연산 노드에 분배한다.
 
 slice 노드는 행렬을 네 조각으로 나눠서 분배했다. 따라서 그 역전파에서는 반대로 4개의 기울기를 결합해야 한다.
+![image](https://github.com/user-attachments/assets/7bb2b28d-fb2d-4821-a51b-ae2862207fcb)
+![image](https://github.com/user-attachments/assets/749add35-267e-4db1-a6d9-c3f90a0b2694)
 
 위의 그림에서 보이듯 slice 노드의 역전파에서는 4개의 행렬을 연결한다. 그림에서는 4개의 기울기 df, dg, di, do를 연결해서 dA를 만들었다.
 
-## 6.3.1 Time LSTM 구현
+### 6.3.1 Time LSTM 구현
+![image](https://github.com/user-attachments/assets/cdeef804-00ab-4c9a-ba33-2c0636f92b84)
+
 
 Time LSTM은 T개분의 시계열 데이터를 한꺼번에 처리하는 계층이다.
-
+![image](https://github.com/user-attachments/assets/299d62d2-bc90-48a7-9894-2adfda7f87ee)
 
 Truncated BPTT는 역전파의 연결은 적당한 길이로 끊으며, 순전파의 흐름은 그래도 유지한다.
 
@@ -164,35 +174,47 @@ Truncated BPTT는 역전파의 연결은 적당한 길이로 끊으며, 순전�
 이 절에서는 현재의 RNNLM의 개선 포인트 3가지를 설명하고 구현하고 얼마나 좋아졌는지 평하하겠다.
 
 ## 6.5.1 LSTM 계층 다층화
+![image](https://github.com/user-attachments/assets/a96a0955-7ce4-46dd-b4b0-ff293ad32ff7)
 
 RNNLM으로 정확한 모델을 만들고자 한다면 많은 경우 LSTM 계층을 깊게 쌍하 효과를 볼 수 있다. 지금까지는 1층만 사용했지만 2층, 3층 식으로 여러 겹 쌓으면 언어 모델의 정확도가 향상되리라 기대할 수 있다. LSTM을 2층으로 쌓아 RNNLM 만든다고 하면 위에 그림처럼 된다.
 
 ## 6.5.2 드롭아웃에 의한 과적합 억제
 LSTM 계층을 다층화하면 시계열 데이터의 복잡한 의존 관계를 학습할 수 있을 것이라 기대할 수 있다. 다르게 표현하면, 층을 깊게 쌓음으로써 표현력이 풍부한 모델을 만들 수 있으나 종종 과적합을 일으킨다. 불행하게도 RNN은 일반적인 피드포워드 신경망보다 쉽게 과적합을 일으킨다는 소식이다. 따라서 RNN의 과적합 대책은 중요하고 , 현재도 활발하게 연구되는 주제이다.
 
+![image](https://github.com/user-attachments/assets/a93e9a78-cfb3-4727-90ad-8aa14f0a2196)
+
+
 드롭아웃은 무작위로 뉴런을 선택하여 선택한 뉴런을 무시한다. 무시한다는 말은 그 앞 계층으로부터의 신호 전달을 막는다는 뜻이다. 이 '무작위한 무시'가 제약이 되어 신경망의 일반화 성능을 개선하는 것이다.
 
+![image](https://github.com/user-attachments/assets/392aacc6-1c6a-45e1-a117-418f05d7ff67)
 
 이 그림은 드롭아웃 계층을 활성화 함수 뒤에 삽입하는 방법으로 과적합 억제에 기여하는 모습이다.
 
 RNN을 사용한 모델에서 드롭아웃 계층을 LSTM 계층의 시계열 방향으로 삽이면 좋은 방법이 아니다.
+![image](https://github.com/user-attachments/assets/78628551-ea96-49a8-8837-34b9ac9e195a)
 
 RNN에서 시계열 방향으로 드롭아웃을 학습 시 넣어버리면 시간이 흐름에 따라 정보가 사라질 수 있다. 즉, 흐르는 시간에 비례해 드롭아웃에 의한 노이즈가 축적된다.
 
 드롭아웃 계층을 깊이 방향(상하 방향)으로 삽입하는 방안을 생각해보자
+![image](https://github.com/user-attachments/assets/1cb9e170-a469-4516-aa5d-077b3f52a033)
 
 이렇게 구성하면 시간 방향으로 아무리 진행해도 정보를 잃지 않는다. 드롭아웃이 시간축과는 독립적으로 깊이 방향에만 영향을 주는 것이다.
 
 '일반적인 드롭아웃'은 시간 방향에는 적합하지 않다. RNN의 시간 방향 정규화를 목표로 하는 방법이 다양하게 제안되다가 변형 드롭아웃이 제안되어 시간 방향으로 적용하는 데 성공했다.
+![image](https://github.com/user-attachments/assets/21fdec1d-020e-41d6-8a80-767b4497daa1)
 
 
 계층의 드롭아웃끼리 마스크를 공유함으로써 마스크가 '고정'된다. 그 겨로가 정보를 잃게 되는 방법도 '고정'되므로, 일반적인 드롭아웃 때와 달리 정보가 지수적으로 손실되는 사태를 피할 수 있다.
 
-## 6.5.3 가중치 공유
+### 6.5.3 가중치 공유
+![image](https://github.com/user-attachments/assets/49ded6ee-9865-45a4-88f3-b1479146fe5b)
+
 
 가중치 공유는 Embedding 계층의 가중치와 Affine 계층의 가중치를 연결하는 기법이다. 두 계층이 가중치를 공유함으로써 학습하는 매개변수 수가 크게 줄어드는 동시에 정확도도 향상되는 일석이조의 기술이다.
 
 ## 6.5.4 개선된 RNNLM 구현
+![image](https://github.com/user-attachments/assets/483cc5ea-399d-4fb8-a853-5079032ecfbf)
+
 
 여기서 개선점은 다음 세 가지이다.
 
@@ -202,6 +224,4 @@ LSTM 계층의 다층화(여기에서는 2층)
 <코드 따라하기>
 ## 6.5.5 첨단 연구로
 
-
-profile
-DSC W/S
+![image](https://github.com/user-attachments/assets/8dedeb67-fc67-4b41-974b-4a8beefc1a88)
