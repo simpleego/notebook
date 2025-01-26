@@ -15,25 +15,20 @@
 - 신경망(모델)에서의 단어 처리
   - 단어 -> 원핫 벡터
 ![image](https://github.com/user-attachments/assets/68c04d97-5c4f-4ca1-8b82-64b873910904)
-
-    
-## 3.2 단순한 word2vec
-## 3.3 학습 데이터 준비
-## 3.4 CBOW 모델 구현
-## 3.5 word2vec 보충
-## 3.6 정리
-
-- 타깃이 되는 단어를 추론하기 위해 그 주변 단어들인 맥락을 윈도우 크기에 맞춰서 넣은면 모델, 즉 신경망이 지금까지 학습된 것을 바탕으로 어떤 타깃 단어가 나와야 하는지 확률 분포를 도출한다
-신경망(모델)에서의 단어 처리
-- 단어 -> 원핫 벡터
 - 입력층과 가중치를 곱하고 편향은 생략하여 matmul만으로 완전연결계층 계산 구현이 가능하다
 - 여기서 중요한 점 ⭐️c를 입력의 원핫 벡터, W를 가중치 행렬이라고 했을 때 matmul(c,W)는 결국 가중치에서의 해당 위치 행벡터⭐️
+
+![image](https://github.com/user-attachments/assets/0918d0d1-f513-45e1-845e-e9d5b1125c2f)
 - 뒤에 나오는 CBOW 모델에서 이 가중치 W는 ⭐️해당 단어의 분산 표현⭐️
 -> 학습을 진행할수록 이 가중치 W값이 더 적절한 값들로 갱신될 것이고 정확하게 단어들을 잘 추론하는 W값을 찾는 것이 목표!
-3.2 단순한 word2vec
+ 
+## 3.2 단순한 word2vec
 word2vec에서 사용되는 신경망에는 CBOW(continuous bag-of-words) 모델, skip-gram 모델
 CBOW 모델 개요
 - 맥락으로부터 타깃을 추론
+
+![image](https://github.com/user-attachments/assets/567d8de2-5ac3-4fe6-aabd-ef10b60d7030)
+
 - 은닉층의 뉴런값은 입력층들의 완전연결계층으로 변환된 값의 평균
 - 입력: 맥락, 출력: 각 단어의 점수(점수가 높을수록 확률이 높다)
 - 입력층의 뉴런수 > 은닉층의 뉴런수⭐️⭐️ -> 결과적으로 밀집벡터를 얻을 수 있다
@@ -50,20 +45,32 @@ CBOW 모델 가중치
 입력 층의 가중치만 사용: word2vec, 특히 skip-gram 모델에서 가장 대중적
 출력 층의 가중치만 사용
 양쪽 가중치 모두 이용: GloVe(통계 기반 + 추론 기반) 기법에서는 이 때 가장 좋은 결과
-3.3 학습 데이터 준비
+
+## 3.3 학습 데이터 준비
 말뭉치 -> 맥락, 타깃(최종적으로 원핫 표현으로 변환)
-3.4 CBOW 모델 구현
+
+## 3.4 CBOW 모델 구현
+![image](https://github.com/user-attachments/assets/b9a0caee-9652-4ebc-83c1-b2ffa6943899)
 
 
 이 때 입력측 matmul 계층들은 모두 같은 가중치 공유
 X의 역전파는 순전파 시의 입력을 서로 바꿔 기울기에 곱함
 미니배치 선택 -> 신경망 입력 -> 기울기 구함 -> 매개변수 갱신 -> 반복
-3.5 word2vec 보충
+
+## 3.5 word2vec 보충
 CBOW 모델과 확률
 - P(타깃 단어 | 맥락 단어들): 맥락 단어들이 주어졌을 경우 타깃 단어가 나타날 확률
 - 말뭉치 전체에 대한 손실 값은 다음과 같이 구할 수 있다(음의 로그 가능도)
+
+![image](https://github.com/user-attachments/assets/81de9bbe-81d7-4123-adeb-a46cf9ffcab6)
+
+ ![image](https://github.com/user-attachments/assets/4c99a739-8faa-4997-a640-ed6fc7ed930d)
+
 (윈도우 크기가 1인 경우)
 skip-gram 모델
+
+![image](https://github.com/user-attachments/assets/660dc8c9-8d03-47dc-97a2-73118378bfdd)
+
 
 - 타깃 단어로부터 맥락 단어들 추론
 - 최종 손실값 = 맥락의 수만큼 있는 각 출력층의 개별 손실값들의 합
@@ -79,7 +86,8 @@ skip-gram 모델
 - 하지만 추론 기반 기법과 통계 기반 기법 중 어떤 것이 더 좋은지는 알 수 없음
 - 두 기법은 서로 관련
 - GloVe: 추론 기반 기법 + 통계 기반 기법, 말뭉치 전체의 통계 정보를 손실 함수에 도입해 미니배치 학습
-학습한 코드는 여기에서
+
+> 학습한 코드는 여기에서
 https://github.com/syi07030/NLP_study
 위 코드는 이 책의 코드와 아래의 코드를 바탕으로 작성했습니다.
 https://github.com/WegraLee/deep-learning-from-scratch-2
