@@ -23,9 +23,9 @@
 -> 학습을 진행할수록 이 가중치 W값이 더 적절한 값들로 갱신될 것이고 정확하게 단어들을 잘 추론하는 W값을 찾는 것이 목표!
  
 ## 3.2 단순한 word2vec
-word2vec에서 사용되는 신경망에는 CBOW(continuous bag-of-words) 모델, skip-gram 모델
-CBOW 모델 개요
-- 맥락으로부터 타깃을 추론
+- word2vec에서 사용되는 신경망에는 CBOW(continuous bag-of-words) 모델, skip-gram 모델
+- CBOW 모델 개요
+  - 맥락으로부터 타깃을 추론
 
 ![image](https://github.com/user-attachments/assets/567d8de2-5ac3-4fe6-aabd-ef10b60d7030)
 
