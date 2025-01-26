@@ -73,9 +73,6 @@ CBOW 모델 가중치
  ![image](https://github.com/user-attachments/assets/4c99a739-8faa-4997-a640-ed6fc7ed930d)
 
 (윈도우 크기가 1인 경우)
-skip-gram 모델
-![image](https://github.com/user-attachments/assets/660dc8c9-8d03-47dc-97a2-73118378bfdd)
-
 
 - 타깃 단어로부터 맥락 단어들 추론
 - 최종 손실값 = 맥락의 수만큼 있는 각 출력층의 개별 손실값들의 합
