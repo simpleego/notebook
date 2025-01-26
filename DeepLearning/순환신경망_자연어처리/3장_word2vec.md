@@ -90,8 +90,8 @@ CBOW 모델 가중치
   - 두 기법은 서로 관련
   - GloVe: 추론 기반 기법 + 통계 기반 기법, 말뭉치 전체의 통계 정보를 손실 함수에 도입해 미니배치 학습
 --- 
-> 학습한 코드는 여기에서
-https://github.com/syi07030/NLP_study
-위 코드는 이 책의 코드와 아래의 코드를 바탕으로 작성했습니다.
-https://github.com/WegraLee/deep-learning-from-scratch-2
-사진 출처 또한 여기에서: https://github.com/WegraLee/deep-learning-from-scratch-2
+- 학습한 코드는 여기에서
+- https://github.com/syi07030/NLP_study
+- 위 코드는 이 책의 코드와 아래의 코드를 바탕으로 작성했습니다.
+- https://github.com/WegraLee/deep-learning-from-scratch-2
+- 사진 출처 또한 여기에서: https://github.com/WegraLee/deep-learning-from-scratch-2
