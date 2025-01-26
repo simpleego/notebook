@@ -115,6 +115,17 @@ RNN 계층: 상태를 가지는 계층, 메모리가 있는 계층 / h(t): 은�
 
 ![image](https://github.com/user-attachments/assets/c0080cbf-fbc2-465a-9454-feb356cbb8df)
 
+- 학습한 코드는 여기에서
+> https://github.com/syi07030/NLP_study
+- 위 코드는 이 책의 코드와 아래의 코드를 바탕으로 작성했습니다.
+> https://github.com/WegraLee/deep-learning-from-scratch-2
+- 사진 출처 또한 여기에서: https://github.com/WegraLee/deep-learning-from-scratch-2
+
+profile
+syi07030
+잭과 근나물
+
+팔로우
 
 ## 5.6 정리
 
