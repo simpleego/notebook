@@ -67,6 +67,9 @@ CBOW 모델 가중치
 (윈도우 크기가 1인 경우)
 - skip-gram 모델
 
+  ![image](https://github.com/user-attachments/assets/deaece18-5737-40e3-99ca-42b9c52985c5)
+
+
  ![image](https://github.com/user-attachments/assets/4c99a739-8faa-4997-a640-ed6fc7ed930d)
 
 (윈도우 크기가 1인 경우)
