@@ -61,3 +61,7 @@ https://github.com/syi07030/NLP_study
 위 코드는 이 책의 코드와 아래의 코드를 바탕으로 작성했습니다.
 https://github.com/WegraLee/deep-learning-from-scratch-2
 사진 출처 또한 여기에서: https://github.com/WegraLee/deep-learning-from-scratch-2
+
+
+# 참고사이트
+- https://velog.io/tags/ML
