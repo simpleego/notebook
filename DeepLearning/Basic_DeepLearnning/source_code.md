@@ -4,7 +4,7 @@
 ![image](https://github.com/user-attachments/assets/42bb3c2e-d9d5-4b4d-80fa-8799f769a496)
 
 ## 구글 콜랩에서 소스코드 열기
-1장 [헬로 파이썬	Open In Colab]()(https://colab.research.google.com/drive/1p_pBspaD0U2lDddKQj3m0HS0gIcJ4GNH?usp=drive_link)
+1장 [헬로 파이썬	Open In Colab](https://colab.research.google.com/drive/1p_pBspaD0U2lDddKQj3m0HS0gIcJ4GNH?usp=drive_link)
 
 2장 [퍼셉트론	Open In Colab](https://colab.research.google.com/drive/1AUKNoYENHXAsnA6lQikOAm_Hx6Tc2zTk?usp=drive_link)
 
