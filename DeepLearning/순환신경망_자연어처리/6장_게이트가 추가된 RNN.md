@@ -225,3 +225,7 @@ LSTM 계층의 다층화(여기에서는 2층)
 ## 6.5.5 첨단 연구로
 
 ![image](https://github.com/user-attachments/assets/8dedeb67-fc67-4b41-974b-4a8beefc1a88)
+
+
+# 참고사이트
+- https://velog.io/tags/ML
