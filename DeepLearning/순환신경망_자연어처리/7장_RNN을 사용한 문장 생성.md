@@ -13,7 +13,7 @@ Chapter7: RNN을 사용한 문장 생성
 - Encoder: 입력 데이터를 인코딩, Decoder: 인코딩된 데이터를 디코딩
   - 인코딩된 정보에는 번역에 필요한 정보가 조밀하게 응축되어 있음
   - 디코더는 이러한 응축된 정보를 바탕으로 도착어 문장 생성
-<div style="border: 2px solid black;">![image](https://github.com/user-attachments/assets/4f80cd08-53bd-4a10-a4a0-54ac8af97626)</div>
+![image](https://github.com/user-attachments/assets/4f80cd08-53bd-4a10-a4a0-54ac8af97626)
 
     - Encoder에서 출력되는 벡터는 마지막 은닉 상태 h: 번역하는 데 필요한 정보가 인코딩, 고정 길이 벡터
     - 즉 인코딩 == 임의 길이의 문장을 고정 길이 벡터로 변환하는 것
