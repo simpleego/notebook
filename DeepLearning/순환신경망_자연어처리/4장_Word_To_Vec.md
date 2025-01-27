@@ -82,3 +82,7 @@
 - 사진 출처 또한 여기에서: https://github.com/WegraLee/deep-learning-from-scratch-2
 
 ## 4.5 정리
+
+
+# 참고사이트
+- https://velog.io/tags/ML
