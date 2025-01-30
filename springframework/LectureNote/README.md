@@ -1,4 +1,4 @@
-# TIL_SPRING_QUICK_START
+# Spring Quick Start
 > 참고문헌
 > 스프링큌스타트 교재내용 참고하여 정리하였음을 밝힘니다.  
 > 그리고 저자님께 교재내용에 감사를 표합니다.
