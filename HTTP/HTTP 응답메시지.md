@@ -1,3 +1,32 @@
+<style>
+  /* 2way헤더와 라인포인트*/
+  table {
+      border-collapse: collapse;
+      text-align: left;
+      line-height: 1.5;
+  }
+  table thead th {
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      vertical-align: top;
+      color: #1b3453;
+      border-top: 2px solid #1b3453;
+      border-bottom: 2px solid #1b3453;
+  }
+  table tbody th {
+      padding: 10px 15px;
+      font-weight: bold;
+      vertical-align: top;
+      border-bottom: 1px solid #ccc;
+      background: #f3f6f7;
+  }
+  table td {
+      padding: 10px 15px;
+      vertical-align: top;
+      border-bottom: 1px solid #ccc;
+  }
+</style>
 ## 1. 1로 시작하는 경우 = Informational responses
 >  요청을 받았으며 프로세스를 계속함
 > 
@@ -6,3 +35,20 @@
 | 100  | Continue           | 요청의 시작 부분이 받아들여졌으며 클라이언트는 계속 이어서 보내야 함 이미 요청을 완료한 경우에는 무시해도 됨 |
 | 101  | Switching Protocol | 요청 헤더의 Update 필드 중 하나로 서버가 프로토콜을 변경함                                                   |
 | 102  | Processing         | 서버가 요청을 수신하고 이를 처리하고 있으나 제대로 된 응답을 알려줄 수 없음                                  |
+
+
+## 2. 2로 시작하는 경우 = Success
+> 요청을 성공적으로 받았으며 인식했고 수용했음
+
+| code | description                  | 설 명   |
+|------|-------------------------------|---------------------------------------------------------------------------------------------|
+| 200  | OK                            | 요청을 정상적으로 처리함                                                                    |
+| 201  | Created                       | 성공적으로 생성에 대한 요청을 받었으며 서버가 새 리소스를 작성함 (대개 POST, PUT일 때)      |
+| 202  | Accepted                      | 요청을 접수했지만 아직 처리하지 않음 (요청은 적절했음)                                      |
+| 203  | Non-Authoritative Information | 요청을 성공적으로 처리했지만 다른 소스에서 수신된 정보를 제공함, 검증이 되지 않은 상태      |
+| 204  | No Content                    | 서버가 요청을 성공적으로 처리했지만 제공할 컨텐츠는 없음                                    |
+| 205  | Reset Content                 | 서버가 요청을 성공적으로 처리했지만 새로운 내용을 확인해야 함을 알려줌 (새로고침 등을 이용) |
+| 206  | Partial Content               | 서버가 GET 요청의 일부만 성공적으로 처리함 - Content-Range와 Date 헤더를 반드시 포함        |
+| 207  | Multi Status                  | 여러 개의 리소스가 여러 status code를 갖고 있는 상황에서 적절한 정보 전달                   |
+| 208  | Already Reported              | DAV에서 사용                                                                                |
+
