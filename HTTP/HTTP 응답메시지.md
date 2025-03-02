@@ -1,32 +1,3 @@
-<style>
-  /* 2way헤더와 라인포인트*/
-  table {
-      border-collapse: collapse;
-      text-align: left;
-      line-height: 1.5;
-  }
-  table thead th {
-      text-align: center;
-      padding: 10px;
-      font-weight: bold;
-      vertical-align: top;
-      color: #1b3453;
-      border-top: 2px solid #1b3453;
-      border-bottom: 2px solid #1b3453;
-  }
-  table tbody th {
-      padding: 10px 15px;
-      font-weight: bold;
-      vertical-align: top;
-      border-bottom: 1px solid #ccc;
-      background: #f3f6f7;
-  }
-  table td {
-      padding: 10px 15px;
-      vertical-align: top;
-      border-bottom: 1px solid #ccc;
-  }
-</style>
 ## 1. 1로 시작하는 경우 = Informational responses
 >  요청을 받았으며 프로세스를 계속함
 > 
@@ -38,7 +9,8 @@
 
 
 ## 2. 2로 시작하는 경우 = Success
-> 요청을 성공적으로 받았으며 인식했고 수용했음
+
+<span style="color:orange"> 요청을 성공적으로 받았으며 인식했고 수용했음 </span>
 
 | code | description                  | 설 명   |
 |------|-------------------------------|---------------------------------------------------------------------------------------------|
