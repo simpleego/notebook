@@ -1,8 +1,7 @@
-#  GraphQL이란? (REST api와 차이점)
+#  GraphQL이란? (REST API와 차이점)
 > https://hahahoho5915.tistory.com/63 사이트 참조
 
-![image](https://github.com/user-attachments/assets/5ac38413-0f14-4e5d-b675-557feba98d5b)
-
+<img src="https://github.com/user-attachments/assets/5ac38413-0f14-4e5d-b675-557feba98d5b" width="400px">
 
 ## 개요
 GraphQL 간단하게 알아보기
