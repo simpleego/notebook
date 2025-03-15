@@ -341,12 +341,12 @@ fragment 표현식에도 파라미터 값을 전달할 수 있다. 리터럴 값
 
 </html>
  
-# References
-- 코드로 배우는 스프링 부트 웹 프로젝트 - 구멍가게 코딩단
-- Thymeleaf 공식 홈페이지 - Getting started with the Standard dialects in 5 minutes
-- Thymeleaf 공식 홈페이지 - Using Thymeleaf 3.1
+# References  
+- 코드로 배우는 스프링 부트 웹 프로젝트 - 구멍가게 코딩단  
+- Thymeleaf 공식 홈페이지 - Getting started with the Standard dialects in 5 minutes  
+- Thymeleaf 공식 홈페이지 - Using Thymeleaf 3.1  
 
-출처: https://bnzn2426.tistory.com/140 [보통의 개발자:티스토리]
+> 출처: https://bnzn2426.tistory.com/140 [보통의 개발자:티스토리]
 
 
 
