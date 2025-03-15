@@ -427,6 +427,10 @@ fragment 표현식에도 파라미터 값을 전달할 수 있다. 리터럴 값
     </body>
 </html>
 ```
+
+# 레이아웃 기능 참조
+> https://velog.io/@jji3205/th.xml
+  
 # References  
 
 - 코드로 배우는 스프링 부트 웹 프로젝트 - 구멍가게 코딩단  
