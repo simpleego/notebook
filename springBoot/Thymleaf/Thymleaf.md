@@ -137,19 +137,30 @@ fragment라는 HTML 조각 파일들을 가져올 수 있는 표현 식이다. �
 
 # 자주 쓰는 구문 정리
 
-텍스트 출력 : th:text
+## 텍스트 출력 : th:text
 HTML 파일에 텍스트를 출력하는 방법이다.
+```html
 <p th:text="#{home.welcome}">Welcome !</p>
+```
+
 재밌는 점은 만약 th:text의 값(위의 경우에는 home.welcome)이 null이면 “Welcome !”을 출력하고, null이 아니면 home.welcome 값을 출력하게 된다.
-인라인(inline) 표현식
+
+## 인라인(inline) 표현식
+
 태그 속성을 사용하지 않고 HTML 텍스트에 직접 표현식을 작성할 수 있다.
 원래는 아래와 같은 식을
+
+```html
 <p>Hello, <span th:text="${session.user.name}">Sebastian</span>!</p>
+```
 다음과 같이 바꿀 수 있다.
+
+```html
 <p>Hello, [[${session.user.name}]]!</p>
+```
 또한 JavaScript나 CSS에서도 인라인 표현식을 사용할 수 있는 방법이 있다.
 
-```js
+```javascript
 <script th:inline="javascript">
     ...
     var username = [[${session.user.name}]];
@@ -163,7 +174,8 @@ CSS도 동일하다.
       text-align: [[${align}]];
     }
 </style>
-반복문 : th:each
+
+## 반복문 : th:each
 
 ```html
 <!DOCTYPE HTML>
@@ -202,7 +214,8 @@ members라는 객체 리스트를 순회하며 각 객체를 member라는 이름
 | first  |  첫 번째 반복 여부(boolean)   |
 | last   |  마지막 반복 여부(boolean)    |
 
-제어문 : th:if, th:unless, 삼항 연산자
+## 제어문 : th:if, th:unless, 삼항 연산자
+
 Thymeleaf에서는 if ~ else를 한 묶음으로 처리하지 않고 따로따로 처리한다.
 예를 들어 ‘sno 값이 5의 배수일 때만 출력하라’는 구문이다.
 
@@ -227,7 +240,9 @@ Thymeleaf에서는 if ~ else를 한 묶음으로 처리하지 않고 따로따�
 </li>
 ```
 위와 같이 삼항 연산자는 표현식 안에 활용할 수 있으므로 훨씬 편리하다.
-th:block
+
+## th:block
+
 별도의 태그가 필요없는 구문으로 개발자가 원하는 속성을 지정할 수 있는 단순한 속성 컨테이너다. 실제 화면에서는 html로 처리되지 않기 때문에 반복문 등을 별도로 처리할 때 많이 사용된다.
 위 제어문 예시에서 사용하면 아래와 같다.
 
@@ -237,7 +252,9 @@ th:block
 </th:block>
 ```
 랜더링 된 html 결과에는 th:block 태그가 사라져 있다.
-레이아웃 처리 : th:insert, th:replace, th:fragment
+
+## 레이아웃 처리 : th:insert, th:replace, th:fragment
+
 Thymeleaf에서 레이아웃을 처리하기 위한 기본적인 방법은, 먼저 포함하고 싶은 부분을 fragment로 정의해야 한다.
 예를 들어 /templates/fragments/fragment1.html 파일이 아래와 같다고 해보자.
 
