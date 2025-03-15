@@ -428,8 +428,95 @@ fragment 표현식에도 파라미터 값을 전달할 수 있다. 리터럴 값
 </html>
 ```
 
-# 레이아웃 기능 참조
-> https://velog.io/@jji3205/th.xml
+# 템플릿 구조화
+thymeleaf의 템플릿 구조화 기능을 사용하면, 공통적인 레이아웃과 다양한 페이지를 분리하여 개별적으로 작성할 수 있습니다. 이를 통해 코드 재사용성과 유지보수성을 향상시킬 수 있습니다.
+
+Thymeleaf에서 템플릿 구조화 기능을 사용하는 방법에는 크게 두 가지가 있습니다.
+
+## 1. Include
+th:include 속성을 사용하여 공통적인 부분을 파일로 분리하여 include할 수 있습니다.
+
+예를 들어, header, footer와 같은 공통적인 영역을 header.html, footer.html 파일로 분리한 후, th:include 속성을 사용하여 각각의 페이지에 include할 수 있습니다.
+
+<!-- header.html -->
+
+```html
+<header>
+  <nav>...</nav>
+</header>
+<!-- footer.html -->
+<footer>
+  <div>...</div>
+</footer>
+```
+
+<!-- page.html -->
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>...</head>
+<body>
+  <div th:include="header :: header"></div>
+  <main>
+    <p>page content</p>
+  </main>
+  <div th:include="footer :: footer"></div>
+</body>
+</html>
+```
+
+## 2.Layout Dialect
+Thymeleaf에서는 Layout Dialect라는 기능을 제공합니다. 이를 사용하면, th:insert, th:replace, th:fragment 등의 속성을 사용하여 페이지 내의 특정 영역을 다른 파일에서 가져올 수 있습니다.
+
+<!-- layout.html -->
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout">
+<head>...</head>
+<body>
+  <header>
+    <nav>...</nav>
+  </header>
+  <main>
+    <div th:replace="~{content :: content}"></div>
+  </main>
+  <footer>
+    <div>...</div>
+  </footer>
+</body>
+</html>
+```
+
+<!-- content.html -->
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>...</head>
+<body>
+  <div th:fragment="content">
+    <p>page content</p>
+  </div>
+</body>
+</html>
+```
+
+<!-- page.html -->
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>...</head>
+<body th:replace="layout :: layout">
+  <div th:replace="~{content :: content}"></div>
+</body>
+</html>
+```
+
+Layout Dialect를 사용하면, th:replace를 사용하여 content.html 파일을 layout.html 파일의 main 영역에 삽입하였습니다. 이를 통해, 템플릿의 구조화를 보다 쉽고 효과적으로 할 수 있습니다.
   
 # References  
 
