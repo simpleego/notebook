@@ -52,7 +52,7 @@ names.stream().skip(3).map((n) -> {
 중개 연산인 map에서 요소를 출력한 후 "success"를 다음 연산으로 넘겨줬구요. 종료 연산인 forEach에서 받은 "success"를 출력했습니다.
 결과가 하나만 나온 이유는 skip이라는 중개 연산에서, 처음 3개의 요소를 제외한 상태의 stream을 다음 연산에게 넘겨줬기 때문입니다.
 
-## ParallelStream
+## ■ ParallelStream
 ```java
 datas.parallelStream().중개연산().종료연산()
 ```
@@ -62,7 +62,7 @@ datas.parallelStream().중개연산().종료연산()
 
 다만, 기본적으로 별도의 Thread pool을 사용하는 게 아니라, **Thread pool 1개를 모든 ParrelStream이 공유**하는 구조라서, 내부에서 db 호출 및 HTTP 요청 등의 코드를 실행하면 Thread pool에 **병목**이 발생하므로, **주의**해서 사용해야 합니다.
 
-## 마무리
+## ■ 마무리
 Stream을 사용하면, 불필요한 for문이나 반복문 없이 높은 가독성으로 반복 처리를 할 수 있습니다.
 
 참고사이트 : https://jaehoney.tistory.com/133
