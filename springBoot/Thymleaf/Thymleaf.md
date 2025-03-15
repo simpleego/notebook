@@ -15,8 +15,9 @@
 타임리프는 Spring MVC와 밀접하게 통합되어 있어, Spring 모델 데이터를 간단히 템플릿에 전달하고 표시할 수 있다. 예를 들어 Spring의 폼 처리, 국제화(i18n), URL 매핑과 같은 기능을 자연스럽게 지원하고 있다.
 
 # 5가지 기본 표현식
-| ${...}  |  변수   표현식(Variable expressions)     |
+| 표기법    | 설명                                 |
 |---------|------------------------------------------|
+| ${...}  |  변수   표현식(Variable expressions)     |
 | *{...}  |  선택 변수 표현식(Selection expressions) |
 | #{...}  |  메세지 표현식(Message expressions)      |
 | @{...}  |  링크 표현식(Link expressions)           |
