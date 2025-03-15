@@ -123,11 +123,14 @@ HTML 파일에 텍스트를 출력하는 방법이다.
 다음과 같이 바꿀 수 있다.
 <p>Hello, [[${session.user.name}]]!</p>
 또한 JavaScript나 CSS에서도 인라인 표현식을 사용할 수 있는 방법이 있다.
+
+```js
 <script th:inline="javascript">
     ...
     var username = [[${session.user.name}]];
     ...
 </script>
+```
 위와 같이 script 태그 안에 th:inline="javascript" 속성을 추가해 주면 된다.
 CSS도 동일하다.
 <style th:inline="css">
@@ -136,6 +139,8 @@ CSS도 동일하다.
     }
 </style>
 반복문 : th:each
+
+```html
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
@@ -156,59 +161,77 @@ CSS도 동일하다.
     </table>
 </body>
 </html>
+```
+
 members라는 객체 리스트를 순회하며 각 객체를 member라는 이름으로 참조해 사용할 수 있다.
 또한 부가적으로 사용할 수 있는 상태(state) 객체라는 것이 있다. 위 예제에서는 state라는 변수명으로 지정했는데, 변수명은 크게 상관 없다.  이 상태 객체는 인덱스 번호, 홀수, 짝수 등의 정보를 가지고 있다.
 
-index : 0부터 시작하는 인덱스
-count : 1부터 시작하는 인덱스
-size : 전체 반복 크기
-even : 짝수 번째 반복 여부(boolean)
-odd : 홀수 번째 반복 여부(boolean)
-first : 첫 번째 반복 여부(boolean)
-last : 마지막 반복 여부(boolean)
+
+| 속성  | 기능                          |
+|--------|-------------------------------|
+| index  |  0부터   시작하는 인덱스      |
+| count  |  1부터 시작하는 인덱스        |
+| size   |  전체 반복 크기               |
+| even   |  짝수 번째 반복 여부(boolean) |
+| odd    |  홀수 번째 반복 여부(boolean) |
+| first  |  첫 번째 반복 여부(boolean)   |
+| last   |  마지막 반복 여부(boolean)    |
 
 제어문 : th:if, th:unless, 삼항 연산자
 Thymeleaf에서는 if ~ else를 한 묶음으로 처리하지 않고 따로따로 처리한다.
 예를 들어 ‘sno 값이 5의 배수일 때만 출력하라’는 구문이다.
+
+```html
 <li th:each="dto : ${dtoList}">
     <span th:if="${dto.sno % 5 == 0}" th:text="{dto.sno}"></span>
 </li>
+```
 ‘위 조건이 아닐 때(sno 값이 5의 배수가 아닐 때)는 *을 출력하라’는 구문을 아래와 같이 추가할 수 있다.
+
+```html
 <li th:each="dto : ${dtoList}">
     <span th:if="${dto.sno % 5 == 0}" th:text="{dto.sno}"></span>
     <span th:unless="${dto.sno % 5 == 0}" th:text="*"></span>
 </li>
+```
 위 두 구문을 삼항 연산자를 활용해 하나의 구문으로 만들 수 있다.
+
+```html
 <li th:each="dto : ${dtoList}">
     <span th:text="{dto.sno % 5 == 0 ? dto.sno : '*'}"></span>
 </li>
+```
 위와 같이 삼항 연산자는 표현식 안에 활용할 수 있으므로 훨씬 편리하다.
 th:block
 별도의 태그가 필요없는 구문으로 개발자가 원하는 속성을 지정할 수 있는 단순한 속성 컨테이너다. 실제 화면에서는 html로 처리되지 않기 때문에 반복문 등을 별도로 처리할 때 많이 사용된다.
 위 제어문 예시에서 사용하면 아래와 같다.
+
+```html
 <th:block="dto : ${dtoList}">
     <li th:text="{dto.sno % 5 == 0 ? dto.sno : '*'}"></li>
 </th:block>
+```
 랜더링 된 html 결과에는 th:block 태그가 사라져 있다.
 레이아웃 처리 : th:insert, th:replace, th:fragment
 Thymeleaf에서 레이아웃을 처리하기 위한 기본적인 방법은, 먼저 포함하고 싶은 부분을 fragment로 정의해야 한다.
 예를 들어 /templates/fragments/fragment1.html 파일이 아래와 같다고 해보자.
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
   <body>
-
     <div th:fragment="part1">
       <h2>Part 1</h2>
     </div>
     <div th:fragment="part2">
       <h2>Part 2</h2>
     </div>
-
   </body>
-
 </html>
 이를 다른 html 파일에서 fragment1.html 조각들을 가져오는 방법은 아래와 같다.
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -221,11 +244,11 @@ Thymeleaf에서 레이아웃을 처리하기 위한 기본적인 방법은, 먼�
     </body>
 
 </html>
+```
+
 위 코드가 랜더링 된 html 파일을 보자.
-...
-
+```html
     <body>
-
         <div>
             <div>
                 <h2>Part 1</h2>
@@ -235,10 +258,8 @@ Thymeleaf에서 레이아웃을 처리하기 위한 기본적인 방법은, 먼�
         <div>
             <h2>Part 2</h2>
         </div>
-
     </body>
-
-...
+```    
 th:insert와 th:replace의 차이는 다음과 같다.
 
 th:insert : 바깥쪽 태그는 그대로 유지하면서 새롭게 추가되는 방식
@@ -250,13 +271,14 @@ th:replace : 기존 내용을 완전히 대체하는 방식
   &copy; 2011 The Good Thymes Virtual Grocery
 </div>
 CSS 선택자 중 id 속성 값을 가져오는 #을 사용하여 html 조각을 include 할 수 있다.
+```html
 <body>
-
   ...
 
   <div th:insert="~{footer :: #copy-section}"></div>
-
 </body>
+```
+
 참고로 fragment 표현식을 사용하는 방법은 아래와 같다.
 
 "~{templatename::selector}" : templatename 파일 안에 있는 Markup Selector 조각을 가져온다.
@@ -265,82 +287,79 @@ CSS 선택자 중 id 속성 값을 가져오는 #을 사용하여 html 조각을
 
 fragment 표현식에도 파라미터 값을 전달할 수 있다. 리터럴 값, Model 객체도 가능하고, 심지어 파일 조각을 파라미터 값으로 전달할 수 있다.
 /templates/fragments/fg2.html
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <body>
-
         <div th:fragment="target(first, second)">
             <div th:replace="${first}"></div>
             <div th:replace="${second}"></div>
         </div>
-
     </body>
-
 </html>
+```
+
 위 fg2.html 파일의 fragment를 불러와 보자.
 /templates/layout.html
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <body>
-
         <th:block th:replace="~{/fragments/fg2 :: target(~{this :: hello}, ~{this :: everyone})}">
             <h2 th:fragment="hello">Hello, </h2>
             <h2 th:fragment="everyone">everyone!</h2>
         <th:block>
-
     </body>
-
 </html>
+```
 위 파일의 렌더링 결과를 예측해 보자.
 먼저 fg2.html의 target fragment가 layout.html에 include될 것이다.
 이때, ${first}가 ~{this :: hello}로, ${second}가 ~{this :: everyone}로 치환된다고 생각하면 좀 편하다.
 결과는 아래와 같다.
+
 /templates/layout.html
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <body>
-
         <div>
             <h2">Hello, </h2>
             <h2>everyone!</h2>
         </div>
-
     </body>
-
 </html>
+```
+
 어떤 파라미터에 값을 전달하고 싶은지 명확하게 지정할 수도 있다.
 /templates/layout.html
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <body>
-
         <th:block th:replace="~{/fragments/fg2 :: target(second = ~{this :: hello}, first = ~{this :: everyone})}">
             <h2 th:fragment="hello">Hello, </h2>
             <h2 th:fragment="everyone">everyone!</h2>
         <th:block>
-
     </body>
-
 </html>
+```
+
 렌더링 된 /templates/layout.html
+
+```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
     <body>
-
         <div>
             <h2">everyone!</h2>
             <h2>Hello, </h2>
         </div>
-
     </body>
-
 </html>
- 
+``` 
 # References  
 
 - 코드로 배우는 스프링 부트 웹 프로젝트 - 구멍가게 코딩단  
