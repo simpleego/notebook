@@ -1,15 +1,16 @@
 # Thymleaf란
-스프링 MVC 패턴에서 뷰 템플릿 엔진(View Template Engine)으로 보통 타임리프(Thymeleaf)가 자주 쓰이며, 스프링 부트에서는 타임리프를 표준 뷰 템플릿 엔진으로 취급하고 있다. 프론트 엔드 엔지니어가 같이 있는 업무 환경에서는 보통 API 방식을 사용하기 때문에 프뷰 템플릿을 사용할 일이 없겠지만, admin 페이지를 만든다거나, 프론트 엔드 엔지니어 없이 혼자 개발해야 하는 환경에서는 뷰 템플릿 엔진을 사용하는게 더 편리할 수 있다. 때문에 1개 정도의 뷰 템플릿 엔진을 간단히 배워두는 것은 크게 어렵지도 않고, 언젠간 도움이 될 것이다.
+스프링 MVC 패턴에서 뷰 템플릿 엔진(View Template Engine)으로 보통 타임리프(Thymeleaf)가 자주 쓰이며, 스프링 부트에서는 타임리프를 표준 뷰 템플릿 엔진으로 취급하고 있다. 프론트 엔드 엔지니어가 같이 있는 업무 환경에서는 보통 API 방식을 사용하기 때문에 뷰 템플릿을 사용할 일이 없겠지만, admin 페이지를 만든다거나, 프론트 엔드 엔지니어 없이 혼자 개발해야 하는 환경에서는 뷰 템플릿 엔진을 사용하는게 더 편리할 수 있다.
 
 # 목차
 - 타임리프의 특징
 - 5가지 기본 표현식
 - 자주 쓰는 구문 정리
+
 # 타임리프의 특징
 ## 내추럴 템플릿  
-타임리프의 가장 대표적인 특징은 HTML을 자연스러운 형태로 유지할 수 있는 내츄럴 템플릿(Natural Template)이라는 점이다. JSP를 포함한 다른 뷰 템플릿들은 JSP 파일 자체를 그대로 웹 브라우저에서 열어보면 JSP 소스코드와 HTML이 뒤죽박죽 섞여있기 때문에, 웹 브라우저에서 정상적인 HTML 결과를 확인할 수 없다. 오직 서버를 통해서 JSP가 렌더링 되고 HTML 응답 결과를 받아야 화면을 확인할 수 있다. 반면에 타임리프로 작성된 파일은 해당 파일을 그대로 웹 브라우저에서 열어도 정상적인 HTML 결과를 확인할 수 있다. 때문에 디자이너와 개발자가 동시에 작업하기에 용이하다.
+타임리프의 가장 대표적인 특징은 **HTML을 자연스러운 형태로 유지할 수 있는 내츄럴 템플릿(Natural Template)** 이라는 점이다. JSP를 포함한 다른 뷰 템플릿들은 JSP 파일 자체를 그대로 웹 브라우저에서 열어보면 JSP 소스코드와 HTML이 뒤죽박죽 섞여있기 때문에, 웹 브라우저에서 정상적인 HTML 결과를 확인할 수 없다. 오직 서버를 통해서 JSP가 렌더링 되고 HTML 응답 결과를 받아야 화면을 확인할 수 있다. 반면에 타임리프로 작성된 파일은 해당 파일을 그대로 웹 브라우저에서 열어도 정상적인 HTML 결과를 확인할 수 있다. 때문에 디자이너와 개발자가 동시에 작업하기에 용이하다.
 ## 서버 사이드 렌더링 지원
-타임리프는 Java에서 템플릿을 렌더링하고 완성된 HTML을 브라우저에 전달하는 서버사이드 렌더링(SSR)을 지원한다. 이는 SEO(검색 엔진 최적화)와 브라우저 호환성을 높이는 데 유리한 장점도 있다.
+타임리프는 Java에서 템플릿을 렌더링하고 완성된 HTML을 브라우저에 전달하는 **서버사이드 렌더링(SSR)** 을 지원한다. 이는 **SEO(검색 엔진 최적화)** 와 브라우저 호환성을 높이는 데 유리한 장점도 있다.
 
 ## Spring MVC와의 통합성
 타임리프는 Spring MVC와 밀접하게 통합되어 있어, Spring 모델 데이터를 간단히 템플릿에 전달하고 표시할 수 있다. 예를 들어 Spring의 폼 처리, 국제화(i18n), URL 매핑과 같은 기능을 자연스럽게 지원하고 있다.
@@ -23,11 +24,13 @@
 | @{...}  |  링크 표현식(Link expressions)           |
 | ~{...}  |  프래그먼트 표현식(Fragment expressions) |
 
-${...} : Variable expressions
+## ${...} : Variable expressions  
+
 Variable expressions are OGNL expressions –or Spring EL if you’re integrating Thymeleaf with Spring– executed on the context variables — also called model attributes in Spring jargon.
 해석 : 수 표현식은 컨텍스트 변수에서 실행되는 OGNL 표현식(또는 Thymeleaf를 Spring과 통합하는 경우 Spring EL)이며 Spring 전문 용어로 모델 속성이라고도 합니다.
 컨트롤러에서 Model 객체에 담아준 데이터를 뷰에서 사용하고 싶을 때, 이 표현식으로 해당 객체에 접근할 수 있다.
 예를 들어 아래와 같이 컨트롤러 클래스 안에 코드를 보자.
+```java
 @Controller
 public class MemberController {
 
@@ -43,7 +46,11 @@ public class MemberController {
         return "/member";
     }
 }
+```
+
+
 Model 객체에 "member"라는 이름으로 member 객체를 속성 값으로 추가했다. 이를 타임리프 템플릿에서 그대로 사용할 수 있다.
+```html
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
@@ -51,14 +58,18 @@ Model 객체에 "member"라는 이름으로 member 객체를 속성 값으로 �
     <p th:text="${member.name}"></p>
 </body>
 </html>
-변수 표현식 내에서 객체의 속성 값에 접근하고자 할 때 스프링 EL(Spring Expression Language)이라는 스프링이 제공하는 표현식을 사용한다. 위와 같이 객체 명에 .(dot)을 사용하면, 프로퍼티 접근법으로 getxxx() 메서드를 호출한다.
+```
+
+변수 표현식 내에서 객체의 속성 값에 접근하고자 할 때 스프링 EL(Spring Expression Language)이라는 스프링이 제공하는 표현식을 사용한다. 위와 같이 객체 명에 .(dot)을 사용하면, 프로퍼티 접근법으로 getxxx() 메서드를 호출한다.
 스프링 EL은 스프링에서 런타임에 객체의 속성, 메서드, 배열, 컬렉션 등에 접근하거나 조작할 수 있도록 설계한 표현식 언어다. 빈 설정 등에서 사용되는데, 따로 찾아보는걸 권한다.
  
-*{...} : Selection expressions
+## *{...} : Selection expressions
 Selection expressions are just like variable expressions, except they will be executed on a previously selected object instead of the whole context variables map.
 해석 : 선택 표현식은 전체 컨텍스트 변수 map 대신 이전에 선택한 객체에서 실행된다는 점을 제외하면, 변수 표현식과 같습니다.
 사실 ${}와 거의 동일하다고 보면 되는데, 사용하기 위해서는 한 가지 전제 조건이 붙는다. Model 객체에 속성 값으로 다양한 객체가 담겨 있을 때, 하나의 객체를 먼저 지정하면 지정된 객체의 속성 이름만으로 접근할 수 있다.
 예시를 보자.
+
+```html  
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
@@ -68,13 +79,16 @@ Selection expressions are just like variable expressions, except they will be ex
     </div>
 </body>
 </html>
+```
+
 th:object="${member}"로 먼저 어떤 속성 값을 사용할 지 미리 지정했다.
 즉, member 컨텍스트 변수를 “선택”했다는 의미로, member.id로 접근하는 것이 아닌 객체 이름을 생략한 id로만 접근할 수 있다.
  
-#{...} : Message (i18n) expressions
+## #{...} : Message (i18n) expressions
 Message expressions (often called text externalization, internationalization or i18n) allows us to retrieve locale-specific messages from external sources (.properties files), referencing them by a key and (optionally) applying a set of parameters.
 해석 : 메시지 표현식(종종 텍스트 외부화, 국제화 또는 i18n이라고 함)을 사용하면 외부 소스(.properties 파일)에서 로케일별 메시지를 검색하여 키로 참조하고 (선택적으로) 매개변수 집합을 적용할 수 있습니다.
 Spring에서 국제화(다국어 처리)를 위해 로케일별 message.properties 파일을 만들기도 한다. 이 파일 안에 담겨 있는 메세지 변수를 참조할 때 사용한다고 생각하면 된다.
+```html  
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
     <div>
@@ -82,33 +96,44 @@ Spring에서 국제화(다국어 처리)를 위해 로케일별 message.properti
     </div>
 </body>
 </html>
+```
+
  
-@{...} : Link (URL) expressions
+## @{...} : Link (URL) expressions
 Link expressions are meant to build URLs and add useful context and session info to them (a process usually called URL rewriting).
 해석 : 링크 표현식은 URL을 빌드하고 유용한 컨텍스트 및 세션 정보를 URL에 추가하기 위한 것입니다(일반적으로 URL 재작성이라고 하는 프로세스).
 링크 처리를 할 때 사용되며, 특히 URL에 쿼리 파라미터를 전달해야 하는 상황에서 좀 더 가독성 좋은 코드를 만들 수 있다.
 예를 들어 /order/details이란 URL에 id 값과 type 값을 GET 파라미터로 전달해야 할 때,
+
+```html
 <a th:href="@{/order/details(id=${orderId},type=${orderType})}">...</a>
+```
+
 위와 같이 () 안에 key=vaule 형태로 파라미터 값을 추가할 수 있다. 마치 메서드를 호출할 때, 파라미터 값을 전달한다고 생각하면 된다. 
+```html
 <!-- HTML로 랜더링 후 예시 -->
 <!-- orderId = 23, orderType = online -->
 <a href="/order/details?id=23;type=online">...</a>
- 
+```
 또한 URL 경로에 변수 값을 사용하는 path variable 방식도 지원한다. URL에서 변수를 {}로 감싼 다음 변수(key)에 넣을 값(value)을 똑같은 방식으로 전달해 주면 된다.
+```html
 <a th:href="@{/order/details/{id}(id=${orderId},type=${orderType})}">...</a>
+```
+
 이때, 경로에 포함되어 있는 key 이외의 값들은 쿼리 파라미터 형태로 추가된다.
+
+```html
 <!-- HTML로 랜더링 후 예시 -->
 <!-- orderId = 23, orderType = online -->
 <a href="/myapp/order/details/23?type=online">...</a>
+```
  
-~{...} : Fragment expressions
+## ~{...} : Fragment expressions
 Fragment expressions are an easy way to represent fragments of markup and move them around templates. Thanks to these expressions, fragments can be replicated, passed to other templates as arguments, and so on.
 해석 : 프래그먼트 표현식은 마크업의 fragment를 표시하고 템플릿에서 이동하는 쉬운 방법입니다. 이러한 식 덕분에, fragment를 복제하고 인수로 다른 템플릿에 전달할 수 있습니다.
 fragment라는 HTML 조각 파일들을 가져올 수 있는 표현 식이다. 보통 특정 부분을 다른 내용으로 변경할 수 있는 th:insert나 th:replace와 같이 사용한다.
 <div th:insert="~{/commons :: main}">...</div>
 위의 경우 commons라는 파일의 main이라는 fragment를 가져 오겠다는 의미다. 이에 대한 자세한 설명은 아래 자주 쓰는 구문 정리에서 다루겠다.
-
-
 
 # 자주 쓰는 구문 정리
 
