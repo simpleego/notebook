@@ -16,6 +16,7 @@
 
 - ![image](https://github.com/user-attachments/assets/4a79c6ce-a115-4def-9665-479b54e802e6)
 
+![image](https://github.com/user-attachments/assets/2d4efc46-8b98-4968-ab5d-795a69b97d15)
 
 ## 2.3 SasS, PaaS, IaaS
 어느 수준까지 서비스가 제공되는지에 따라서 클라우드 서비스는 SaaS, PaaS, IaaS 3가지로 구분된다.
