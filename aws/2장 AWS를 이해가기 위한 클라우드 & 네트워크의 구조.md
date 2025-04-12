@@ -14,7 +14,8 @@
 - 분산 처리는 서버 여러 대에 분산하여 처리하는 기술이다.
 - 가상화나 분산 처리는 이중화에도 사용된다.
 
-![image](https://github.com/user-attachments/assets/ffb868c9-65d6-4397-bcbb-a55462acde43)
+- ![image](https://github.com/user-attachments/assets/4a79c6ce-a115-4def-9665-479b54e802e6)
+
 
 ## 2.3 SasS, PaaS, IaaS
 어느 수준까지 서비스가 제공되는지에 따라서 클라우드 서비스는 SaaS, PaaS, IaaS 3가지로 구분된다.
