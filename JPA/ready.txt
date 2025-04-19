@@ -1,0 +1,42 @@
+create database edudb;
+create user 'jdbctest'@'%' identified by 'jdbctest';
+grant all on edudb. to 'jdbctest'@'%';
+flush privileges;
+
+
+implementation 'mysql:mysql-connector-java:8.0.17'
+implementation 'org.hibernate:hibernate-core:6.5.2.Final
+implementation jakarta.persistence:jakarta.persistence-api:3.2.0"
+implementation jakarta.xml.bind:jakarta.xml.bind-api:4.0.2
+compileOnly 'org.projectlombok:lombok:1.18.32'
+annotation Processor 'org.projectlombok:lombok:1.18.32'
+
+
+강사명 : 김정현(unicodaum@hanmail.net)
+
+과정명 : Spring Data JPA 프로그래밍
+
+교육 입과를 환영합니다.
+
+이 교육 과정에서는 자바 애플리케이션으로 하이버네이트 기반의 JPA(JPQL, Queryd sl)
+
+구현 방법에 대해 먼저 익히고 Spring Data JPA 에 대하여 학습합니다.
+
+12시간 동안 어떠한 내용을 학습할지 어느정도 정해져 있지만 여러분들의 선수지식 과
+
+특별히 관심있는 기술에 따라서 교육 내용은 조정될 수 있습니다.
+
+2일간의 교육이지만 여러분들께 좀더 도움이 되는 교육 진행을 위해 사전설문을 진 행합니다.
+
+
+다음 내용을 작성해서 강사메일로 보내주세요
+
+메일제목: Spring Data JPA 프로그래밍-XXX(성명)
+
+1. 이 과정에 입과한 동기와 목적을 작성하세요.
+2. Spring 과 Spring Boot 의 구현 방법을 알고 있는지요?(상, 중, 하, 모름)
+3. JDBC의 구현 방법을 알고 있는지요?(상, 중, 하, 모름)
+4. MyBatis 의 구현 방법을 알고 있는지요?(상, 중, 하, 모름)
+5. 특별히 관심을 갖고 있는 JPA 관련 기술이 있다면 작성하세요.
+6. 교육 내용과 방식에 대한 건의 사항이 있으면 작성하세요.
+교육자료 공유 : https://naver.me/FnmPorhA(0419)
