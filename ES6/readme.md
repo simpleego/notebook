@@ -288,8 +288,102 @@ console.log(message); // "오늘의 주인공은 🎉Alice🎉입니다!"
 
 ✨ 템플릿 리터럴을 사용하면 **문자열을 더 직관적으로 작성**할 수 있으며, **가독성과 유지보수성이 크게 향상**됩니다.  
 
-
 ## ④ 기본 매개 변수 (Default parameters)
+### 🚀 자바스크립트의 **기본 매개변수 (Default Parameters)** 특징 및 예제
+
+기본 매개변수는 **함수를 호출할 때 인수를 제공하지 않았을 경우, 기본값을 설정하는 기능**입니다. ES6(ECMAScript 2015)에서 도입되었으며, **더 간결하고 안전한 코드 작성**이 가능합니다.
+
+---
+
+## 1️⃣ 기본 문법  
+기본 매개변수는 함수 정의 시 **매개변수에 기본값을 설정**할 수 있습니다.
+
+```javascript
+function greet(name = "Guest") {
+  console.log(`Hello, ${name}!`);
+}
+
+greet("Alice"); // "Hello, Alice!"
+greet(); // "Hello, Guest!" (기본값 적용)
+```
+✅ **함수 호출 시 값이 전달되지 않으면, 기본값 사용!**  
+
+---
+
+## 2️⃣ 여러 개의 기본 매개변수 설정  
+```javascript
+function introduce(name = "Unknown", age = 0) {
+  console.log(`이름: ${name}, 나이: ${age}`);
+}
+
+introduce("Bob", 25); // "이름: Bob, 나이: 25"
+introduce("Alice"); // "이름: Alice, 나이: 0"
+introduce(); // "이름: Unknown, 나이: 0"
+```
+💡 **여러 개의 기본값을 설정하면 더 유연한 함수 작성 가능!**
+
+---
+
+## 3️⃣ 기본 매개변수와 `undefined`  
+기본값은 **매개변수가 `undefined`일 때만 적용**됩니다.  
+```javascript
+function multiply(a, b = 2) {
+  return a * b;
+}
+
+console.log(multiply(5, 3)); // 15 (b에 값 전달됨)
+console.log(multiply(5, undefined)); // 10 (b에 기본값 적용)
+console.log(multiply(5, null)); // 0 (null은 기본값 적용되지 않음)
+```
+🔹 `undefined`인 경우에만 기본값이 사용되며, `null`은 기본값으로 대체되지 않음!  
+
+---
+
+## 4️⃣ 기본값을 함수 호출 결과로 설정  
+기본값에 함수 호출 결과를 사용할 수도 있습니다.  
+```javascript
+function getDefaultValue() {
+  return 42;
+}
+
+function calculate(value = getDefaultValue()) {
+  console.log(`결과: ${value}`);
+}
+
+calculate(); // "결과: 42" (기본값으로 함수 호출 결과 사용)
+calculate(100); // "결과: 100"
+```
+✅ **동적 기본값 설정 가능!**
+
+---
+
+## 5️⃣ 기본 매개변수와 나머지 매개변수(`...rest`)  
+기본 매개변수와 **나머지 매개변수**(`...rest`)를 함께 사용할 수도 있습니다.  
+```javascript
+function sum(x = 0, ...numbers) {
+  return numbers.reduce((acc, num) => acc + num, x);
+}
+
+console.log(sum()); // 0 (아무 값도 전달되지 않음)
+console.log(sum(10, 20, 30)); // 60
+console.log(sum(undefined, 5, 5)); // 10 (기본값 적용)
+```
+📌 **첫 번째 매개변수에 기본값을 설정하고, 나머지 값을 배열로 처리 가능!**
+
+---
+
+### 🎯 정리  
+| 특징 | 설명 |
+|------|------|
+| 기본값 설정 | 함수 호출 시 값이 없으면 자동 적용 |
+| `undefined` 처리 | `undefined`인 경우 기본값 사용 (`null`은 적용되지 않음) |
+| 동적 기본값 | 기본값을 함수 호출 결과로 설정 가능 |
+| 나머지 매개변수와 함께 사용 | 기본값과 `...rest`를 조합하여 활용 가능 |
+
+✨ **기본 매개변수를 활용하면 더 안전하고 유연한 함수 작성이 가능**하며, **예외 처리 로직을 줄여 가독성을 높일 수 있습니다!**  
+
+더 궁금한 점이 있으면 언제든지 질문하세요! 🚀😃
+
 ## ⑤ 배열 및 객체 비구조화 (Array and object destructing)
 ## ⑥ 가져오기 및 내보내기 (Import and export) 
 ## ⑦ 프로미스 (Promises) 
