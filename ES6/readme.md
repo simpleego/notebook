@@ -171,12 +171,124 @@ const user = new Person("Bob");
 | 코드 표현 | **더 간결하고 직관적** |
 | 사용 제한 | `new`와 함께 사용 불가 (생성자 함수 X) |
 
-화살표 함수는 **간결한 표현과 `this` 유지**가 장점이지만, `arguments`를 사용할 수 없고 생성자 함수로 사용할 수 없다는 점을 기억해야 합니다. 😃
-
-더 궁금한 점이 있으면 언제든지 물어보세요! 🚀
-
+화살표 함수는 **간결한 표현과 `this` 유지**가 장점이지만, `arguments`를 사용할 수 없고 생성자 함수로 사용할 수 없다는 점을 기억해야 합니다. 
 
 ## ③ 템플릿 리터럴 (Template Literals)
+### 🚀 자바스크립트의 **템플릿 리터럴** 특징 및 사용법  
+
+템플릿 리터럴(Template Literal)은 ES6에서 도입된 기능으로, 기존의 문자열 연결 방식보다 **더 간결하고 가독성이 좋은 문자열**을 만들 수 있습니다.  
+
+---
+
+## 1️⃣ 기본 문법  
+템플릿 리터럴은 **백틱(``` ` ```)**을 사용하여 문자열을 정의합니다.  
+
+```javascript
+const name = "Alice";
+const greeting = `Hello, ${name}!`;
+console.log(greeting); // "Hello, Alice!"
+```
+✅ **`${}`를 사용해 변수를 문자열 내에서 쉽게 삽입 가능**  
+
+🔹 기존 방식(`+` 연산자 사용)
+```javascript
+const name = "Alice";
+const greeting = "Hello, " + name + "!";
+console.log(greeting); // "Hello, Alice!"
+```
+
+🔹 템플릿 리터럴 사용 (`${}` 활용)
+```javascript
+const name = "Alice";
+const greeting = `Hello, ${name}!`;
+console.log(greeting); // "Hello, Alice!"
+```
+✨ **코드가 훨씬 깔끔해지고 가독성이 향상됨!**  
+
+---
+
+## 2️⃣ 다중 행 문자열 (Multi-line String)  
+템플릿 리터럴을 사용하면 **줄바꿈을 쉽게 표현**할 수 있습니다.  
+
+🔹 기존 방식 (`\n` 필요)
+```javascript
+const message = "안녕하세요!\n여러 줄의 문자열을\n작성하고 싶어요.";
+console.log(message);
+```
+
+🔹 템플릿 리터럴 사용 (백틱 내부에서 줄바꿈 가능)
+```javascript
+const message = `안녕하세요!
+여러 줄의 문자열을
+작성하고 싶어요.`;
+console.log(message);
+```
+💡 **템플릿 리터럴을 사용하면 `\n` 없이 간결한 코드 작성 가능!**  
+
+---
+
+## 3️⃣ 표현식 삽입 (Expression Interpolation)  
+`${}` 내부에 **변수뿐만 아니라 표현식도 사용 가능**합니다.  
+```javascript
+const a = 10;
+const b = 20;
+const result = `합계: ${a + b}`;
+console.log(result); // "합계: 30"
+```
+✔️ **연산이나 함수 호출도 가능**  
+```javascript
+const getPrice = () => 19900;
+const message = `상품 가격은 ${getPrice()}원입니다.`;
+console.log(message); // "상품 가격은 19900원입니다."
+```
+
+---
+
+## 4️⃣ 중첩 템플릿 리터럴  
+템플릿 리터럴은 **중첩된 문자열을 사용할 때도 유용**합니다.  
+```javascript
+const user = {
+  name: "Alice",
+  age: 25
+};
+
+const userInfo = `사용자 정보:
+이름: ${user.name}
+나이: ${user.age}세`;
+
+console.log(userInfo);
+```
+
+---
+
+## 5️⃣ 태그드 템플릿 (Tagged Template)  
+태그드 템플릿을 사용하면 **함수를 활용해 문자열을 조작**할 수 있습니다.  
+```javascript
+function highlight(strings, value) {
+  return `${strings[0]}🎉${value}🎉${strings[1]}`;
+}
+
+const message = highlight`오늘의 주인공은 ${"Alice"}입니다!`;
+console.log(message); // "오늘의 주인공은 🎉Alice🎉입니다!"
+```
+🔹 `strings`: 템플릿 문자열의 **고정된 부분**  
+🔹 `value`: **삽입된 변수**  
+
+📌 **태그드 템플릿을 활용하면 HTML 렌더링, 다국어 처리, 보안 기능 적용 등 다양한 응용 가능!**  
+
+---
+
+### 🎯 정리  
+| 특징 | 설명 |
+|------|------|
+| 백틱(``` ` ```) 사용 | 더 간결한 문자열 작성 가능 |
+| `${}` 표현식 | 변수뿐만 아니라 연산, 함수 호출도 가능 |
+| 줄바꿈 지원 | `\n` 없이 자연스러운 다중 행 문자열 생성 가능 |
+| 태그드 템플릿 | 문자열을 함수와 함께 조작 가능 |
+
+✨ 템플릿 리터럴을 사용하면 **문자열을 더 직관적으로 작성**할 수 있으며, **가독성과 유지보수성이 크게 향상**됩니다.  
+
+
 ## ④ 기본 매개 변수 (Default parameters)
 ## ⑤ 배열 및 객체 비구조화 (Array and object destructing)
 ## ⑥ 가져오기 및 내보내기 (Import and export) 
