@@ -659,6 +659,127 @@ console.log(deleteUser(1)); // "User 1 deleted"
 ✨ **모듈 시스템을 활용하면 코드의 유지보수가 쉬워지고 재사용성이 높아집니다!**  
 
 ## ⑦ 프로미스 (Promises) 
+### 🚀 자바스크립트 **Promises** 특징 및 사용법  
+
+`Promise`는 **비동기 작업의 결과를 처리하는 객체**로, ES6(ECMAScript 2015)에서 도입되었습니다. 이를 활용하면 **콜백 지옥(Callback Hell)을 해결**하고, 비동기 코드를 더 가독성 있게 작성할 수 있습니다.  
+
+---
+
+## 1️⃣ `Promise`의 기본 개념  
+`Promise`는 **비동기 작업이 완료되었는지 여부를 추적**합니다.  
+```javascript
+const promise = new Promise((resolve, reject) => {
+  // 비동기 작업 실행 (예: 데이터 요청)
+  let success = true;
+
+  if (success) {
+    resolve("✅ 작업 성공!");
+  } else {
+    reject("❌ 작업 실패!");
+  }
+});
+
+promise
+  .then(result => console.log(result)) // 성공 시 실행
+  .catch(error => console.error(error)) // 실패 시 실행
+  .finally(() => console.log("🎉 작업 완료!")); // 항상 실행
+```
+✨ **`resolve()`가 호출되면 `.then()`, `reject()`가 호출되면 `.catch()` 실행!**  
+
+---
+
+## 2️⃣ `Promise`의 상태  
+`Promise`는 **세 가지 상태**를 가집니다.  
+| 상태 | 설명 |
+|------|------|
+| **Pending** | 작업 진행 중 (초기 상태) |
+| **Fulfilled** | 작업 성공 (`resolve()` 호출) |
+| **Rejected** | 작업 실패 (`reject()` 호출) |
+
+📌 `.finally()`는 성공/실패와 관계없이 항상 실행됨!  
+
+---
+
+## 3️⃣ `then()`, `catch()`, `finally()`  
+🔹 **비동기 결과를 처리하는 체이닝(chaining)** 방식  
+```javascript
+const asyncTask = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("✅ 데이터 로드 완료!");
+  }, 2000);
+});
+
+asyncTask
+  .then(data => console.log(data)) // "✅ 데이터 로드 완료!"
+  .catch(error => console.error(error))
+  .finally(() => console.log("🎉 작업 종료!"));
+```
+
+✅ **`.then()`으로 성공 처리, `.catch()`로 오류 처리, `.finally()`로 정리 작업 수행!**  
+
+---
+
+## 4️⃣ `Promise.all()` – 여러 작업 동시에 실행  
+여러 개의 `Promise`를 동시에 실행하고, **모두 완료될 때 처리**  
+```javascript
+const task1 = new Promise(resolve => setTimeout(() => resolve("🚀 첫 번째 작업 완료!"), 1000));
+const task2 = new Promise(resolve => setTimeout(() => resolve("🔥 두 번째 작업 완료!"), 2000));
+
+Promise.all([task1, task2]).then(results => {
+  console.log(results); // ["🚀 첫 번째 작업 완료!", "🔥 두 번째 작업 완료!"]
+});
+```
+✅ **모든 `Promise`가 완료되면 결과 배열을 반환!**  
+
+---
+
+## 5️⃣ `Promise.race()` – 가장 빠른 작업만 처리  
+가장 먼저 완료되는 `Promise`의 결과를 반환  
+```javascript
+const taskA = new Promise(resolve => setTimeout(() => resolve("🐢 느린 작업"), 3000));
+const taskB = new Promise(resolve => setTimeout(() => resolve("⚡ 빠른 작업"), 1000));
+
+Promise.race([taskA, taskB]).then(result => {
+  console.log(result); // "⚡ 빠른 작업"
+});
+```
+✅ **먼저 완료된 `Promise`의 결과만 반환!**  
+
+---
+
+## 6️⃣ `async/await` – `Promise`를 더 쉽게 사용하기  
+`async/await`를 사용하면 `Promise`를 **더 직관적으로 처리**할 수 있습니다.  
+```javascript
+function fetchData() {
+  return new Promise(resolve => setTimeout(() => resolve("🌟 데이터 가져오기 성공!"), 2000));
+}
+
+async function getData() {
+  const data = await fetchData(); // Promise의 결과를 기다림
+  console.log(data);
+}
+
+getData(); // "🌟 데이터 가져오기 성공!"
+```
+✅ **`await`을 사용하면 `Promise`의 결과를 기다리고, 코드가 동기적으로 실행되는 것처럼 보이게 됨!**  
+
+---
+
+### 🎯 정리  
+| 기능 | 설명 |
+|------|------|
+| `Promise` | 비동기 작업을 처리하는 객체 |
+| `resolve()` | 작업 성공 |
+| `reject()` | 작업 실패 |
+| `.then()` | 성공 결과 처리 |
+| `.catch()` | 오류 처리 |
+| `.finally()` | 항상 실행되는 코드 |
+| `Promise.all()` | 모든 `Promise`가 완료될 때 실행 |
+| `Promise.race()` | 가장 빠른 `Promise` 결과만 반환 |
+| `async/await` | `Promise`를 더 직관적으로 사용 가능 |
+
+✨ `Promise`를 활용하면 **비동기 코드의 가독성을 높이고 예외 처리를 쉽게 할 수 있습니다!**  
+
 ## ⑧ 나머지 매개 변수 및 확산 연산자 (Rest parameter and Spread operator) 
 ## ⑨ 클래스 (Classes)
 
