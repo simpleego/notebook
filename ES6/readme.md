@@ -385,7 +385,279 @@ console.log(sum(undefined, 5, 5)); // 10 (기본값 적용)
 더 궁금한 점이 있으면 언제든지 질문하세요! 🚀😃
 
 ## ⑤ 배열 및 객체 비구조화 (Array and object destructing)
+### 🚀 자바스크립트의 **배열 및 객체 비구조화 할당 (Destructuring Assignment)** 특징 및 예제  
+
+비구조화 할당은 **배열이나 객체에서 필요한 값을 손쉽게 추출하는 문법**으로, ES6(ECMAScript 2015)에서 도입되었습니다. 이 문법을 활용하면 코드가 더 간결해지고 가독성이 향상됩니다.  
+
+---
+
+## 1️⃣ 배열 비구조화 할당 (Array Destructuring)  
+배열의 각 요소를 **변수에 쉽게 할당**할 수 있습니다.  
+
+```javascript
+const numbers = [1, 2, 3];
+
+const [first, second, third] = numbers;
+
+console.log(first); // 1
+console.log(second); // 2
+console.log(third); // 3
+```
+✅ **배열의 요소를 개별 변수에 할당 가능!**  
+
+---
+
+### 🌟 일부 요소만 추출하기  
+필요한 요소만 선택적으로 가져올 수도 있습니다.  
+
+```javascript
+const numbers = [10, 20, 30, 40];
+
+const [first, , third] = numbers;
+
+console.log(first); // 10
+console.log(third); // 30
+```
+🔹 **쉼표(`,`)를 사용하여 특정 인덱스의 값만 추출 가능!**  
+
+---
+
+### 🌟 기본값 설정하기  
+배열 요소가 `undefined`일 경우 기본값을 설정할 수도 있습니다.  
+```javascript
+const [x = 5, y = 10] = [1];
+console.log(x); // 1
+console.log(y); // 10 (기본값 적용)
+```
+📌 **기본값을 설정하면 예외 처리 없이 안전한 코드 작성 가능!**  
+
+---
+
+### 🌟 나머지 요소(`...rest`) 활용하기  
+나머지 요소를 배열로 저장할 수도 있습니다.  
+```javascript
+const [first, ...rest] = [100, 200, 300, 400];
+
+console.log(first); // 100
+console.log(rest);  // [200, 300, 400]
+```
+🔹 **남은 요소를 `...rest`를 사용해 배열로 담을 수 있음!**  
+
+---
+
+## 2️⃣ 객체 비구조화 할당 (Object Destructuring)  
+객체의 속성을 **손쉽게 변수에 할당**할 수 있습니다.  
+```javascript
+const user = { name: "Alice", age: 25 };
+
+const { name, age } = user;
+
+console.log(name); // "Alice"
+console.log(age); // 25
+```
+✨ **객체에서 필요한 속성만 간결하게 추출 가능!**  
+
+---
+
+### 🌟 변수명 변경하기  
+추출한 값을 **다른 변수명으로 저장**할 수도 있습니다.  
+```javascript
+const user = { fullName: "Alice", years: 25 };
+
+const { fullName: name, years: age } = user;
+
+console.log(name); // "Alice"
+console.log(age); // 25
+```
+💡 **객체의 키 이름과 다른 변수명을 사용할 수 있음!**  
+
+---
+
+### 🌟 기본값 설정하기  
+객체 속성이 없는 경우 기본값을 설정할 수 있습니다.  
+```javascript
+const user = { name: "Bob" };
+
+const { name, age = 30 } = user;
+
+console.log(name); // "Bob"
+console.log(age); // 30 (기본값 적용)
+```
+📌 **객체 속성이 없을 때 안전한 값 설정 가능!**  
+
+---
+
+### 🌟 나머지 속성(`...rest`) 활용하기  
+나머지 속성을 객체로 저장할 수도 있습니다.  
+```javascript
+const user = { id: 1, name: "Charlie", age: 28, country: "Korea" };
+
+const { id, name, ...details } = user;
+
+console.log(id); // 1
+console.log(name); // "Charlie"
+console.log(details); // { age: 28, country: "Korea" }
+```
+🔹 **객체의 일부 속성만 추출하고, 나머지를 새로운 객체로 저장 가능!**  
+
+---
+
+## 3️⃣ 함수에서 비구조화 할당 활용하기  
+함수의 매개변수에서 **비구조화 할당을 사용하면 더욱 깔끔한 코드 작성 가능**  
+```javascript
+function displayUser({ name, age }) {
+  console.log(`이름: ${name}, 나이: ${age}`);
+}
+
+const user = { name: "Daisy", age: 27 };
+
+displayUser(user); // "이름: Daisy, 나이: 27"
+```
+✅ **객체를 함수에 전달할 때, 필요한 속성만 추출 가능!**  
+
+---
+
+### 🎯 정리  
+| 특징 | 설명 |
+|------|------|
+| 배열 비구조화 | 배열 요소를 개별 변수로 쉽게 추출 가능 |
+| 객체 비구조화 | 객체 속성을 변수로 간결하게 할당 가능 |
+| 기본값 설정 | `undefined`인 경우 안전한 값 적용 가능 |
+| 나머지 요소(`...rest`) | 남은 값들을 배열 또는 객체로 저장 가능 |
+| 함수 매개변수 활용 | 함수 내에서 속성 추출 가능 |
+
+✨ 비구조화 할당을 사용하면 **더 직관적이고 효율적인 코드 작성**이 가능하며, **객체와 배열을 다루는 작업을 간결하게 처리할 수 있습니다!**  
+
+
 ## ⑥ 가져오기 및 내보내기 (Import and export) 
+### 🚀 자바스크립트 **`import` & `export`** 특징 및 사용법  
+
+`import`와 `export`는 ES6(ECMAScript 2015)에서 도입된 **모듈 시스템**으로, 코드의 구조를 개선하고 유지보수를 쉽게 할 수 있도록 돕습니다. 이를 활용하면 **코드를 여러 파일로 분리하고 필요한 부분만 가져와 사용할 수 있습니다.**  
+
+---
+
+## 1️⃣ `export` – 모듈 내보내기  
+
+### 🔹 **기본 내보내기 (`export default`)**  
+모듈에서 **단일 값을 내보낼 때** 사용합니다.  
+```javascript
+// math.js
+export default function add(a, b) {
+  return a + b;
+}
+```
+🔹 다른 파일에서 가져올 때, 이름을 변경할 수도 있습니다.  
+```javascript
+// app.js
+import sum from "./math.js"; // `sum`으로 변경 가능
+
+console.log(sum(10, 5)); // 15
+```
+✅ **기본 내보내기(`export default`)는 하나의 모듈에서 하나만 사용 가능!**  
+
+---
+
+### 🔹 **개별 내보내기 (`export`)**  
+여러 개의 함수나 변수를 내보낼 때 사용합니다.  
+```javascript
+// utils.js
+export function multiply(a, b) {
+  return a * b;
+}
+
+export const PI = 3.1415;
+```
+🔹 가져올 때 **중괄호 `{}`**를 사용해야 합니다.  
+```javascript
+// app.js
+import { multiply, PI } from "./utils.js";
+
+console.log(multiply(4, 5)); // 20
+console.log(PI); // 3.1415
+```
+
+📌 **여러 개의 값 내보내고 가져올 때 개별 `export` 사용!**  
+
+---
+
+## 2️⃣ `import` – 모듈 가져오기  
+
+### 🔹 **모든 내보낸 값을 한 번에 가져오기 (`import * as`)**  
+```javascript
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+export function subtract(a, b) {
+  return a - b;
+}
+```
+🔹 `*`를 사용해 **전체 모듈을 객체처럼 가져올 수 있음**  
+```javascript
+// app.js
+import * as math from "./math.js";
+
+console.log(math.add(5, 3)); // 8
+console.log(math.subtract(10, 6)); // 4
+```
+📌 **모든 모듈을 `math` 객체로 불러와 사용 가능!**  
+
+---
+
+### 🔹 **이름 변경해서 가져오기 (`import { as }`)**  
+```javascript
+// constants.js
+export const MAX_USERS = 100;
+export const MIN_USERS = 1;
+```
+🔹 **사용할 때 이름을 변경할 수 있음**  
+```javascript
+// app.js
+import { MAX_USERS as MAX, MIN_USERS as MIN } from "./constants.js";
+
+console.log(MAX); // 100
+console.log(MIN); // 1
+```
+📌 **모듈 이름을 변경해서 가져올 수 있어 코드 가독성 향상!**  
+
+---
+
+## 3️⃣ `export`와 `import`의 활용  
+
+### 🔹 **모듈을 구조화하여 유지보수 용이**  
+```javascript
+// userService.js
+export function getUser(id) {
+  return { id, name: "Alice" };
+}
+
+export function deleteUser(id) {
+  return `User ${id} deleted`;
+}
+```
+```javascript
+// app.js
+import { getUser, deleteUser } from "./userService.js";
+
+console.log(getUser(1)); // { id: 1, name: "Alice" }
+console.log(deleteUser(1)); // "User 1 deleted"
+```
+
+✅ **코드를 여러 파일로 분리하면 관리가 쉬워지고 가독성이 향상됨!**  
+
+---
+
+### 🎯 정리  
+| 기능 | 설명 |
+|------|------|
+| `export default` | 모듈에서 단일 값 내보내기 (가져올 때 이름 변경 가능) |
+| `export` | 여러 개의 값 내보내기 (가져올 때 `{}` 사용) |
+| `import * as name` | 모든 모듈을 한 번에 가져오기 |
+| `import { name as alias }` | 모듈 이름 변경해서 가져오기 |
+
+✨ **모듈 시스템을 활용하면 코드의 유지보수가 쉬워지고 재사용성이 높아집니다!**  
+
 ## ⑦ 프로미스 (Promises) 
 ## ⑧ 나머지 매개 변수 및 확산 연산자 (Rest parameter and Spread operator) 
 ## ⑨ 클래스 (Classes)
