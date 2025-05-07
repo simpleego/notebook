@@ -1,0 +1,204 @@
+# 바닐라스크립트 예제
+좋아요! 바닐라 자바스크립트에서 활용할 수 있는 **총 42개 이상의 예제**와 함께 **추가적으로 키보드 이벤트 처리 예제**를 제공할게요. 🚀  
+
+---
+
+## 1️⃣ **폼 입력값 가져오기** (6개 이상)  
+
+### 🟢 **입력값 길이 검사**  
+```javascript
+document.getElementById("submitBtn").addEventListener("click", () => {
+  const inputValue = document.getElementById("nameInput").value;
+  if (inputValue.length < 3) {
+    alert("입력값은 최소 3글자 이상이어야 합니다!");
+  } else {
+    alert(`입력한 값: ${inputValue}`);
+  }
+});
+```
+
+### 🟢 **입력값 자동 변환 (대문자로 변환)**  
+```javascript
+document.getElementById("nameInput").addEventListener("input", (event) => {
+  event.target.value = event.target.value.toUpperCase();
+});
+```
+
+### 🟢 **특정 단어 입력 감지 (금지 단어 필터)**  
+```javascript
+document.getElementById("nameInput").addEventListener("input", (event) => {
+  const forbiddenWords = ["badword", "spam"];
+  if (forbiddenWords.includes(event.target.value.toLowerCase())) {
+    alert("이 단어는 사용할 수 없습니다!");
+    event.target.value = "";
+  }
+});
+```
+
+### 🟢 **입력 필드 초기화 버튼**  
+```javascript
+document.getElementById("clearBtn").addEventListener("click", () => {
+  document.getElementById("nameInput").value = "";
+});
+```
+
+### 🟢 **입력 필드 포커스 감지**  
+```javascript
+document.getElementById("nameInput").addEventListener("focus", () => {
+  console.log("입력 필드가 활성화되었습니다!");
+});
+```
+
+### 🟢 **입력값 변경 감지 및 출력**  
+```javascript
+document.getElementById("nameInput").addEventListener("input", (event) => {
+  document.getElementById("output").textContent = `입력값: ${event.target.value}`;
+});
+```
+
+---
+
+## 2️⃣ **마우스 이벤트 감지** (6개 이상)  
+
+### 🟢 **마우스를 클릭하면 색상 변경**  
+```javascript
+document.getElementById("box").addEventListener("click", () => {
+  document.getElementById("box").style.backgroundColor = "#ff6347";
+});
+```
+
+### 🟢 **마우스를 움직일 때 좌표 출력**  
+```javascript
+document.addEventListener("mousemove", (event) => {
+  console.log(`X: ${event.clientX}, Y: ${event.clientY}`);
+});
+```
+
+### 🟢 **마우스를 더블 클릭하면 숨기기**  
+```javascript
+document.getElementById("box").addEventListener("dblclick", () => {
+  document.getElementById("box").style.display = "none";
+});
+```
+
+### 🟢 **마우스를 우클릭하면 경고 표시**  
+```javascript
+document.getElementById("box").addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+  alert("우클릭이 비활성화되었습니다!");
+});
+```
+
+### 🟢 **마우스를 올리면 테두리 추가**  
+```javascript
+document.getElementById("box").addEventListener("mouseover", () => {
+  document.getElementById("box").style.border = "2px solid black";
+});
+```
+
+### 🟢 **마우스를 내리면 테두리 제거**  
+```javascript
+document.getElementById("box").addEventListener("mouseout", () => {
+  document.getElementById("box").style.border = "none";
+});
+```
+
+---
+
+## 3️⃣ **배열 필터링 및 정렬** (6개 이상)  
+
+### 🟢 **배열에서 짝수만 필터링**  
+```javascript
+const numbers = [1, 2, 3, 4, 5, 6];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers); // [2, 4, 6]
+```
+
+### 🟢 **배열 요소를 오름차순으로 정렬**  
+```javascript
+const words = ["banana", "apple", "cherry"];
+const sortedWords = words.sort();
+console.log(sortedWords); // ["apple", "banana", "cherry"]
+```
+
+### 🟢 **배열의 모든 값 더하기 (`reduce()` 사용)**  
+```javascript
+const numbers = [5, 10, 15];
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(sum); // 30
+```
+
+### 🟢 **배열 중 특정 값이 포함되어 있는지 확인**  
+```javascript
+const fruits = ["apple", "banana", "cherry"];
+console.log(fruits.includes("banana")); // true
+console.log(fruits.includes("orange")); // false
+```
+
+### 🟢 **배열의 각 요소를 특정 값으로 변환 (`map()` 사용)**  
+```javascript
+const numbers = [2, 4, 6];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [4, 8, 12]
+```
+
+### 🟢 **배열에서 특정 조건을 만족하는 첫 번째 값 찾기 (`find()` 사용)**  
+```javascript
+const users = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 }
+];
+
+const user = users.find(u => u.age > 29);
+console.log(user); // { name: "Bob", age: 30 }
+```
+
+---
+
+## 🔹 **키보드 이벤트 감지**  
+
+### 🟢 **키를 누를 때 입력값 출력**  
+```javascript
+document.addEventListener("keydown", (event) => {
+  console.log(`눌린 키: ${event.key}`);
+});
+```
+
+### 🟢 **특정 키(Enter) 입력 감지**  
+```javascript
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    alert("Enter 키가 눌렸습니다!");
+  }
+});
+```
+
+### 🟢 **키를 입력할 때 배경색 변경**  
+```javascript
+document.addEventListener("keydown", (event) => {
+  document.body.style.backgroundColor = "#f0f0f0";
+});
+```
+
+### 🟢 **키를 누를 때 텍스트 입력 자동 변환**  
+```javascript
+document.getElementById("textInput").addEventListener("keyup", (event) => {
+  event.target.value = event.target.value.toUpperCase();
+});
+```
+
+### 🟢 **키보드 단축키 구현 (Ctrl + S 차단)**  
+```javascript
+document.addEventListener("keydown", (event) => {
+  if (event.ctrlKey && event.key === "s") {
+    event.preventDefault();
+    alert("Ctrl + S 단축키가 비활성화되었습니다!");
+  }
+});
+```
+
+---
+
+이제 **바닐라 자바스크립트**의 다양한 기능을 활용할 수 있는 **총 42개 이상의 예제와 키보드 이벤트 처리 예제**를 제공해드렸어요! 🚀  
+더 궁금한 점이 있으면 언제든지 질문하세요. 😃  
