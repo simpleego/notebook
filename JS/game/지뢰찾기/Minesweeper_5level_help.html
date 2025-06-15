@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>지뢰찾기 5단계 게임</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 5px;
+            justify-content: center;
+            margin: 20px auto;
+            /*pointer-events: none;*/
+        }
+
+        .cell {
+            width: 60px;
+            height: 60px;
+            font-size: 18px;
+            text-align: center;
+            line-height: 60px;
+            border: 1px solid #333;
+            cursor: pointer;
+            background-color: #f2f2f2;
+            user-select: none;
+        }
+
+        .revealed {
+            background-color: #ddd;
+            cursor: default;
+        }
+
+        .flagged {
+            background-color: #ffd;
+        }
+
+        #info {
+            margin-bottom: 10px;
+        }
+
+        select,
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>지뢰찾기 게임</h2>
+    <div id="settings">
+        난이도 선택:
+        <select id="levelSelect">
+            <option value="1">1단계 (쉬움)</option>
+            <option value="2">2단계</option>
+            <option value="3" selected>3단계</option>
+            <option value="4">4단계</option>
+            <option value="5">5단계 (어려움)</option>
+        </select>
+        <button onclick="startGame()">게임 시작</button>
+        <button onclick="togglePause()">⏸️ 일시 정지/재개</button>
+    </div>
+
+    <div id="info">
+        현재 단계: <span id="currentLevel">3</span> |
+        클릭 수: <span id="clickCount">0</span> |
+        남은 지뢰: <span id="remainingMines">?</span> |
+        남은 시간: <span id="timer">60</span>초
+    </div>
+
+    <div id="gameBoard"></div>
+    <div id="result"></div>
+    <!-- 도움말 버튼 -->
+    <button id="helpBtn">❓ 도움말 보기</button>
+
+    <!-- 도움말 모달 창 -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>게임 도움말</h3>
+            <p>
+                이 게임은 지뢰를 피하며 모든 안전한 칸을 여는 것이 목표입니다.<br>
+                - 왼쪽 클릭: 칸을 엽니다.<br>
+                - 오른쪽 클릭: 깃발을 꽂아 지뢰로 표시합니다.<br>
+                - 지뢰를 클릭하거나 시간이 초과되면 실패합니다.<br>
+                - 모든 지뢰를 정확히 깃발로 표시하거나 안전한 칸을 모두 열면 성공입니다.
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        const size = 5;
+        const gameBoard = document.getElementById("gameBoard");
+        const timerDisplay = document.getElementById("timer");
+        const clickDisplay = document.getElementById("clickCount");
+        const mineDisplay = document.getElementById("remainingMines");
+        const levelDisplay = document.getElementById("currentLevel");
+        const resultDisplay = document.getElementById("result");
+
+        let board = [];
+        let totalMines = 5;
+        let flagsPlaced = 0;
+        let timeLeft = 60;
+        let timerId;
+        let gameOver = false;
+        let paused = false;
+        let clickCount = 0;
+        let level = 3;
+
+        const timeLimits = { 1: 90, 2: 75, 3: 60, 4: 45, 5: 30 };
+        const mineCounts = { 1: 3, 2: 5, 3: 7, 4: 9, 5: 11 };
+
+
+        renderEmptyBoard(); // 초기 화면에 빈 보드 그리기
+
+        function renderEmptyBoard() {
+            gameBoard.innerHTML = '';
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+
+        function startGame() {
+            level = parseInt(document.getElementById("levelSelect").value);
+            levelDisplay.textContent = level;
+            totalMines = mineCounts[level];
+            timeLeft = timeLimits[level];
+            timerDisplay.textContent = timeLeft;
+            mineDisplay.textContent = totalMines;
+            clickCount = 0;
+            clickDisplay.textContent = clickCount;
+            flagsPlaced = 0;
+            gameOver = false;
+            paused = false;
+            board = [];
+            gameBoard.innerHTML = '';
+            resultDisplay.textContent = '';
+            gameBoard.style.pointerEvents = 'auto';
+
+            if (timerId) clearInterval(timerId);
+            timerId = setInterval(() => {
+                if (!paused && !gameOver) {
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+                    if (timeLeft <= 0) endGame("⏰ 시간 초과! 실패");
+                }
+            }, 1000);
+
+            // initialize board
+            for (let r = 0; r < size; r++) {
+                board[r] = [];
+                for (let c = 0; c < size; c++) {
+                    board[r][c] = { mine: false, revealed: false, flagged: false };
+                }
+            }
+
+            let placed = 0;
+            while (placed < totalMines) {
+                let r = Math.floor(Math.random() * size);
+                let c = Math.floor(Math.random() * size);
+                if (!board[r][c].mine) {
+                    board[r][c].mine = true;
+                    placed++;
+                }
+            }
+
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+
+                    cell.addEventListener("click", onCellClick);
+                    cell.addEventListener("contextmenu", onCellRightClick);
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+        function onCellClick(e) {
+            if (gameOver || paused) return;
+            const cellEl = e.currentTarget;
+            const r = parseInt(cellEl.dataset.row);
+            const c = parseInt(cellEl.dataset.col);
+            const cell = board[r][c];
+            if (cell.revealed || cell.flagged) return;
+
+            cell.revealed = true;
+            clickCount++;
+            clickDisplay.textContent = clickCount;
+
+            cellEl.classList.add("revealed");
+
+            if (cell.mine) {
+                cellEl.textContent = "💣";
+                endGame("💥 지뢰를 클릭했습니다. 실패");
+            } else {
+                const hint = countAdjacentMines(r, c);
+                if (hint > 0) {
+                    cellEl.textContent = `💡${hint}`;
+                }
+                checkWin();
+            }
+        }
+
+        function onCellRightClick(e) {
+            e.preventDefault();
+            if (gameOver || paused) return;
+
+            const cellEl = e.currentTarget;
+            const r = parseInt(cellEl.dataset.row);
+            const c = parseInt(cellEl.dataset.col);
+            const cell = board[r][c];
+
+            if (cell.revealed) return;
+
+            if (!cell.flagged && flagsPlaced >= totalMines) return;
+
+            cell.flagged = !cell.flagged;
+            cellEl.textContent = cell.flagged ? "🚩" : "";
+            cellEl.classList.toggle("flagged", cell.flagged);
+
+            flagsPlaced += cell.flagged ? 1 : -1;
+            mineDisplay.textContent = totalMines - flagsPlaced;
+
+            checkWin();
+        }
+
+        function countAdjacentMines(r, c) {
+            const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+            return dirs.reduce((count, [dr, dc]) => {
+                const nr = r + dr, nc = c + dc;
+                if (nr >= 0 && nr < size && nc >= 0 && nc < size) {
+                    if (board[nr][nc].mine) count++;
+                }
+                return count;
+            }, 0);
+        }
+
+        function checkWin() {
+            let allSafeRevealed = true;
+            let allMinesFlagged = true;
+
+            for (let r = 0; r < size; r++) {
+                for (let c = 0; c < size; c++) {
+                    const cell = board[r][c];
+                    if (!cell.mine && !cell.revealed) allSafeRevealed = false;
+                    if (cell.mine && !cell.flagged) allMinesFlagged = false;
+                }
+            }
+
+            if (allSafeRevealed || (allMinesFlagged && flagsPlaced === totalMines)) {
+                endGame("🎉 성공! 지뢰찾기 완료");
+            }
+        }
+
+        function endGame(message) {
+            gameOver = true;
+            clearInterval(timerId);
+            gameBoard.style.pointerEvents = 'none';
+            const score = Math.max(0, (timeLeft * 5) + ((size * size - clickCount) * 2));
+            resultDisplay.textContent = `${message} | 점수: ${score}점`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const helpBtn = document.getElementById("helpBtn");
+            const helpModal = document.getElementById("helpModal");
+            const closeBtn = helpModal?.querySelector(".close");
+
+            helpBtn.onclick = () => helpModal.style.display = "block";
+            closeBtn.onclick = () => helpModal.style.display = "none";
+            window.onclick = (e) => {
+                if (e.target === helpModal) helpModal.style.display = "none";
+            };
+        });
+
+    </script>
+</body>
+
+</html>
