@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>간단한 지뢰찾기 게임</title>
+  <style>
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 60px;
+      border: 1px solid #333;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+
+    .revealed {
+      background-color: #ddd;
+      cursor: default;
+    }
+
+    #scoreBoard {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>지뢰찾기 (5x5)</h2>
+  <div id="scoreBoard">
+    클릭 횟수: <span id="clickCount">0</span> |
+    남은 시간: <span id="timer">60</span>초
+  </div>
+  <div id="gameBoard"></div>
+  <div id="result"></div>
+
+  <script>
+    const size = 5;
+    const totalMines = 5;
+    const board = [];
+    let clickCount = 0;
+    let timeLeft = 60;
+    let gameOver = false;
+
+    const gameBoard = document.getElementById('gameBoard');
+    const clickDisplay = document.getElementById('clickCount');
+    const timerDisplay = document.getElementById('timer');
+    const resultDisplay = document.getElementById('result');
+
+    // 타이머
+    const countdown = setInterval(() => {
+      if (gameOver) return;
+      timeLeft--;
+      timerDisplay.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        endGame("⏰ 시간이 초과되었습니다!");
+      }
+    }, 1000);
+
+    // 보드 초기화
+    function initBoard() {
+      // 빈 2차 배열 생성
+      for (let r = 0; r < size; r++) {
+        board[r] = [];
+        for (let c = 0; c < size; c++) {
+          board[r][c] = { mine: false, revealed: false };
+        }
+      }
+
+      // 지뢰 무작위 배치
+      let minesPlaced = 0;
+      while (minesPlaced < totalMines) {
+        let r = Math.floor(Math.random() * size);
+        let c = Math.floor(Math.random() * size);
+        if (!board[r][c].mine) {
+          board[r][c].mine = true;
+          minesPlaced++;
+        }
+      }
+
+      // 셀 생성
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.addEventListener('click', handleClick);
+          gameBoard.appendChild(cell);
+        }
+      }
+    }
+
+    function handleClick(e) {
+      if (gameOver) return;
+
+      const row = parseInt(e.target.dataset.row);
+      const col = parseInt(e.target.dataset.col);
+      const cellData = board[row][col];
+
+      if (cellData.revealed) return;
+
+      cellData.revealed = true;
+      e.target.classList.add('revealed');
+      clickCount++;
+      clickDisplay.textContent = clickCount;
+
+      if (cellData.mine) {
+        e.target.textContent = "💣";
+        endGame("💥 지뢰를 클릭했습니다. 게임 오버!");
+        return;
+      }
+
+      const hint = countAdjacentMines(row, col);
+      if (hint > 0) {
+        e.target.textContent = `💡${hint}`;
+      } else {
+        e.target.textContent = "";
+      }
+    }
+
+    function countAdjacentMines(r, c) {
+      const directions = [
+        [-1, 0], [1, 0], [0, -1], [0, 1] // 상하좌우
+      ];
+      let count = 0;
+      directions.forEach(([dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (nr >= 0 && nr < size && nc >= 0 && nc < size) {
+          if (board[nr][nc].mine) count++;
+        }
+      });
+      return count;
+    }
+
+    function endGame(message) {
+      gameOver = true;
+      clearInterval(countdown);
+      resultDisplay.textContent = message + ` 총 클릭: ${clickCount}`;
+    }
+
+    initBoard();
+    if (timerId) clearInterval(timerId); // 기존 타이머 제거
+  timerId = setInterval(() => {
+    if (paused || gameOver) return;
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      endGame("⏰ 시간이 초과되었습니다!");
+    }
+  }, 1000); // ✅ 게임 시작 시점부터 타이머 작동
+
+  </script>
+</body>
+</html>

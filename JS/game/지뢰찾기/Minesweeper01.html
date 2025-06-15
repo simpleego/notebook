@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>지뢰찾기 게임</title>
+  <style>
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      gap: 5px;
+      margin-bottom: 10px;
+      pointer-events: none; /* 시작 전 비활성화 */
+    }
+    .cell {
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 60px;
+      border: 1px solid #333;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .revealed {
+      background-color: #ddd;
+      cursor: default;
+    }
+    #scoreBoard, #controls {
+      margin-bottom: 10px;
+    }
+    #startScreen {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="startScreen">
+    <h2>지뢰찾기 게임</h2>
+    <button onclick="startGame()">게임 시작</button>
+  </div>
+
+  <div id="scoreBoard">
+    클릭 횟수: <span id="clickCount">0</span> |
+    남은 시간: <span id="timer">60</span>초
+  </div>
+  <div id="gameBoard"></div>
+  <div id="result"></div>
+  <div id="controls">
+    <button onclick="togglePause()">⏸️ 게임 멈춤 / 재개</button>
+  </div>
+
+  <script>
+    const size = 5;
+    const totalMines = 5;
+    const board = [];
+    let clickCount = 0;
+    let timeLeft = 60;
+    let gameOver = false;
+    let paused = false;
+    let timerId = null;
+
+    const gameBoard = document.getElementById('gameBoard');
+    const clickDisplay = document.getElementById('clickCount');
+    const timerDisplay = document.getElementById('timer');
+    const resultDisplay = document.getElementById('result');
+    const scoreBoard = document.getElementById('scoreBoard');
+    const controls = document.getElementById('controls');
+    const startScreen = document.getElementById('startScreen');
+
+    function startGame() {
+      gameOver = false;
+      paused = false;
+      timeLeft = 60;
+      clickCount = 0;
+      board.length = 0;
+      gameBoard.innerHTML = '';
+      resultDisplay.textContent = '';
+      clickDisplay.textContent = '0';
+      timerDisplay.textContent = timeLeft;
+
+      gameBoard.style.pointerEvents = 'auto';
+      startScreen.style.display = 'none';
+
+      initBoard();
+
+      if (timerId) clearInterval(timerId);
+      timerId = setInterval(() => {
+        if (paused || gameOver) return;
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          endGame("⏰ 시간이 초과되었습니다!");
+        }
+      }, 1000);
+    }
+
+    function togglePause() {
+      if (gameOver) return;
+      paused = !paused;
+      gameBoard.style.pointerEvents = paused ? 'none' : 'auto';
+    }
+
+    function initBoard() {
+      for (let r = 0; r < size; r++) {
+        board[r] = [];
+        for (let c = 0; c < size; c++) {
+          board[r][c] = { mine: false, revealed: false };
+        }
+      }
+
+      let minesPlaced = 0;
+      while (minesPlaced < totalMines) {
+        let r = Math.floor(Math.random() * size);
+        let c = Math.floor(Math.random() * size);
+        if (!board[r][c].mine) {
+          board[r][c].mine = true;
+          minesPlaced++;
+        }
+      }
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.addEventListener('click', handleClick);
+          gameBoard.appendChild(cell);
+        }
+      }
+    }
+
+    function handleClick(e) {
+      if (gameOver || paused) return;
+
+      const row = parseInt(e.target.dataset.row);
+      const col = parseInt(e.target.dataset.col);
+      const cellData = board[row][col];
+
+      if (cellData.revealed) return;
+
+      cellData.revealed = true;
+      e.target.classList.add('revealed');
+      clickCount++;
+      clickDisplay.textContent = clickCount;
+
+      if (cellData.mine) {
+        e.target.textContent = "💣";
+        endGame("💥 지뢰를 클릭했습니다. 게임 오버!");
+        return;
+      }
+
+      const hint = countAdjacentMines(row, col);
+      if (hint > 0) {
+        e.target.textContent = `💡${hint}`;
+      }
+    }
+
+    function countAdjacentMines(r, c) {
+      const directions = [[-1,0],[1,0],[0,-1],[0,1]];
+      return directions.reduce((count, [dr, dc]) => {
+        const nr = r + dr, nc = c + dc;
+        if (nr >= 0 && nr < size && nc >= 0 && nc < size && board[nr][nc].mine) {
+          count++;
+        }
+        return count;
+      }, 0);
+    }
+
+    function endGame(message) {
+      gameOver = true;
+      clearInterval(timerId);
+      gameBoard.style.pointerEvents = 'none';
+      resultDisplay.textContent = message + ` 총 클릭: ${clickCount}`;
+    }
+  </script>
+</body>
+</html>
