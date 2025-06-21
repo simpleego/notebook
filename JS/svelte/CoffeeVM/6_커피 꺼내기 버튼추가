@@ -1,0 +1,274 @@
+# 커피 꺼내기 기능 추가
+```javascript
+<script>
+	let insertedCoins = 0;
+	let selectedCoffee = null;
+	let isDispensing = false;
+	let modalMessage = '';
+	let showModal = false;
+
+	const coffeeOptions = [
+		{ name: '밀크커피', image: '/images/milkOut.png', price: 300 },
+		{ name: '설탕커피', image: '/images/sugarOut.png', price: 200 },
+		{ name: '블랙커피', image: '/images/blackOut.png', price: 100 }
+	];
+
+	$: minPrice = Math.min(...coffeeOptions.map((c) => c.price));
+	$: canSelect = insertedCoins >= minPrice;
+
+	function insertCoin(amount) {
+		insertedCoins += amount;
+	}
+
+	function selectCoffee(name, price, image) {
+		if (insertedCoins >= price && !isDispensing) {
+			isDispensing = true;
+			selectedCoffee = { name, image };
+			insertedCoins -= price;
+			isDispensing = false;
+		}
+	}
+
+	function returnCoins() {
+		if (insertedCoins > 0) {
+			modalMessage = `잔돈 ₩${insertedCoins} 반환되었습니다!`;
+			showModal = true;
+			insertedCoins = 0;
+		}
+	}
+
+	function handleTakeOut() {
+		modalMessage = `${selectedCoffee.name}를 꺼냈습니다. 맛있게 드세요!`;
+		showModal = true;
+		selectedCoffee = null;
+	}
+
+	function closeModal() {
+		showModal = false;
+		modalMessage = '';
+	}
+</script>
+
+<div id="container">
+	<div class="menu">
+		{#each coffeeOptions as coffee}
+			<div class="option">
+				<img src={coffee.image} alt={coffee.name} />
+				<!-- <div>{coffee.name}</div> -->
+				<div class="price">{coffee.price}원</div>
+				<button
+					class="coffee-button"
+					on:click={() => selectCoffee(coffee.name, coffee.price, coffee.image)}
+					disabled={insertedCoins < coffee.price || isDispensing}
+				>
+					{coffee.name}
+				</button>
+			</div>
+		{/each}
+	</div>
+
+	<div class="button-group">
+		<button class="coin-button" on:click={() => insertCoin(500)}>500원</button>
+		<button class="coin-button" on:click={() => insertCoin(100)}>100원</button>
+		<button class="coin-button" on:click={() => insertCoin(50)}>50원</button>
+	</div>
+
+	<div class="status">현재원 금액: ₩{insertedCoins}</div>
+	<div class="outlet">
+		{#if selectedCoffee}
+			<img class="outlet-img" src={selectedCoffee.image} alt="추출 커피" />
+			<div class="outlet-label">{selectedCoffee.name}가 준비되었습니다</div>
+			<button class="takeout-button" on:click={handleTakeOut}>꺼내기</button>
+		{/if}
+	</div>
+
+	<div class="refund-area">
+		<button class="refund-button" on:click={returnCoins}>잔돈 반환</button>
+	</div>
+
+	<!-- 꺼내기 버튼  
+	{#if selectedCoffee}
+		<img class="outlet-img" src={selectedCoffee.image} alt="추출 커피" />
+		<div class="outlet-label">{selectedCoffee.name}가 준비되었습니다</div>
+		<button class="takeout-button" on:click={handleTakeOut}>꺼내기</button>
+	{/if}-->
+
+	<!-- 커피 출력 알림 모달 -->
+	{#if showModal}
+		<div class="modal-backdrop" on:click={closeModal}>
+			<div class="modal">
+				<p>{modalMessage}</p>
+				<button on:click={closeModal}>확인</button>
+			</div>
+		</div>
+	{/if}
+</div>
+
+<style>
+	#container {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 1rem;
+		border: 10px solid #ddd;
+		background-color: rgb(238, 236, 229);
+	}
+
+	.menu {
+		display: flex;
+		justify-content: center; /* 수평 가운데 정렬 */
+		align-items: center; /* 수직 가운데 정렬 (필요한 경우) */
+		gap: 1rem;
+		padding-bottom: 10px;
+	}
+
+	.coffee-button {
+		margin: 10px 0;
+	}
+	.option {
+		text-align: center;
+		cursor: pointer;
+	}
+	.option img {
+		width: 120px;
+		height: 160px;
+		object-fit: cover;
+		border-radius: 8px;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	}
+	.price {
+		color: #555;
+		font-size: 0.9rem;
+		margin-top: 0.3rem;
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: center; /* 수평 가운데 정렬 */
+		margin-top: 1rem;
+		text-align: center;
+	}
+	.coffee-button,
+	.coin-button {
+		margin: 0.4rem;
+		padding: 0.6rem 1.4rem;
+		background-color: #4a321e;
+		color: white;
+		border: none;
+		border-radius: 6px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+
+	.coffee-button[disabled] {
+		background-color: #999;
+		cursor: not-allowed;
+	}
+
+	.coin-button:hover {
+		background-color: #372517;
+	}
+
+	.status {
+		text-align: center;
+		margin-top: 0.5rem;
+		font-weight: bold;
+	}
+
+	.outlet {
+		text-align: center;
+		min-height: 200px;
+		margin-top: 2rem;
+		padding: 1rem;
+		border-top: 2px dashed #bbb;
+		background-color: #fdfbf8;
+	}
+
+	.outlet-img {
+		width: 100px;
+		height: auto;
+		animation: drop 0.4s ease-in;
+	}
+
+	.outlet-label {
+		margin-top: 0.5rem;
+		font-weight: bold;
+		color: #4a321e;
+	}
+
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background-color: rgba(0, 0, 0, 0.4);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 999;
+	}
+
+	.modal {
+		background: white;
+		padding: 1.5rem 2rem;
+		border-radius: 8px;
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+		animation: pop 0.3s ease;
+	}
+
+	.refund-area {
+		text-align: center;
+		margin-top: 1.5rem;
+	}
+
+	.refund-button {
+		padding: 0.6rem 1.2rem;
+		background-color: #5b5;
+		border: none;
+		border-radius: 6px;
+		color: white;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+
+	.refund-button:hover {
+		background-color: #489848;
+	}
+
+	.takeout-button {
+		margin-top: 0.6rem;
+		padding: 0.5rem 1.2rem;
+		background-color: #3e5;
+		border: none;
+		border-radius: 6px;
+		color: white;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+
+	.takeout-button:hover {
+		background-color: #2f9c61;
+	}
+	@keyframes drop {
+		0% {
+			transform: translateY(-30px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	@keyframes pop {
+		0% {
+			transform: scale(0.8);
+			opacity: 0;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+</style>
+```
