@@ -1,3 +1,4 @@
+```javascript
 <script>
 	const coffeeOptions = [
 		{ name: '밀크커피', image: '/images/milkOut.png', price: '300원' },
@@ -50,3 +51,4 @@
 		margin-top: 0.3rem;
 	}
 </style>
+```
