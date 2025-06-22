@@ -9,7 +9,7 @@
 > node --version    또는  node --v
 > npm --version  또는  npm --v
 ## React 프로젝트 생성
-> **yarn create react-app 프로젝트이름**
+> **yarn create react-app 프로젝트이름**  
 > yarn create react-app my-app
 --- 
 
