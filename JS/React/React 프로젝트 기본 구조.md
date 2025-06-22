@@ -1,6 +1,7 @@
 # React 프로젝트 기본 구조
 
-![image](https://github.com/user-attachments/assets/fff849d9-1876-497c-ad74-80d43e9142bc)
+![image](https://github.com/user-attachments/assets/51088a62-148a-4ca5-9f22-ca8787736f12)
+
 
 ## node_modules
 
