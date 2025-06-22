@@ -10,7 +10,7 @@ package.json
 CRA 기본 패키지 외 추가로 설치된 라이브러리/패키지 정보(종류, 버전)가 기록되는 파일
 모든 프로젝트마다 package.json이 하나씩 존재한다.
 
-"dependencies"
+### "dependencies"
 리액트를 사용하기 위한 모든 패키지 리스트, 버전 확인이 가능.
 실제 코드는 node.modules 폴더에 존재한다.
 
@@ -41,11 +41,13 @@ package A를 1.0 버전으로, package B를 2.1버전으로 설치했을 때, �
 
 ## public
 
-index.html을 포함하고 있다.
+### index.html을 포함하고 있다.
 <div id="root><div>
 가상 DOM을 위한 html파일 (빈 껍데기 파일)
 
 💡 우리가 웹을 배포한다는 건 특정 폴더를 서버 컴퓨터에 올려두는 것이다. 그래서 서버랑 연결된 url로 접근하면 해당 폴더의 파일을 요청할 수 있다 -> 뒤에 따로 추가적인 url을 안붙이면 index.html을 요청한다. 우리가 CRA를 배포했을 때 실제 서버에 배포되는 폴더가 public 폴더이다. 그래서 우리가 public에 특정 디렉토리, 파일을 만들어두면 서버 url을 통해서 접근이 가능하다. 예시로, public/images/test.png 파일을 만들어두면, 서버에 접속해서 해당 파일에 접근할 수 있다.
+
+
   
 ## src
 
@@ -54,7 +56,8 @@ React의 시작
 ReactDOM.render(<App />, document.getElementById('root'))
 ReactDOM.render 함수의 인자는 두개이다. 첫 번째 인자는 화면에 보여주고 싶은 컴포넌트,
 두 번째 인자는 화면에 보여주고 싶은 컴포넌트의 위치
-App.js
+
+### App.js
 
 현재 화면에 보여지고 있는 초기 컴포넌트
 React Router를 설치하면 컴포넌트가 최상위 컴포넌트로 App.js 컴포넌트 자리에 위치하게 된다.
