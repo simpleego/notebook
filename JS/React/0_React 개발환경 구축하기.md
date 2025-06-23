@@ -11,8 +11,8 @@
 
 ---  
 ## yarn으로 React 프로젝트 생성
-> 명령어 문법 : **yarn create react-app 프로젝트이름**  
-> **yarn create react-app my-app**
+명령어 문법 : **yarn create react-app 프로젝트이름**  
+**yarn create react-app my-app**
 > 프로젝트 이름을 "my-app"으로 생성한다.  
 > 모든 설치가 끝나면 "my-app" 폴더가 생성된다.
 
