@@ -44,7 +44,7 @@ We suggest that you begin by typing:
 ---  
 
 ### npx로 React 프로젝트 생성
-> **npx create create-react-app test**
+> **npx create-react-app test**
 
 ```
  npm start
