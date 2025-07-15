@@ -1,0 +1,115 @@
+# 서점을 객체지향적으로 표현한다.
+
+### 🧱 클래스 구조 설명
+- **Book 클래스**: 제목, 저자, 가격을 저장하고 정보를 출력합니다.
+- **Customer 클래스**: 이름과 보유 금액을 저장하며 책을 구매하는 기능을 가집니다.
+- **Bookstore 클래스**: 판매할 도서 목록을 관리하고 판매 기능을 제공합니다.
+
+---
+
+### 💻 Java 코드 예시
+```java
+// Book.java
+public class Book {
+    private String title;
+    private String author;
+    private double price;
+
+    public Book(String title, String author, double price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public double getPrice() { return price; }
+
+    public void showInfo() {
+        System.out.println("도서: " + title + ", 저자: " + author + ", 가격: " + price + "원");
+    }
+}
+```
+
+```java
+// Customer.java
+public class Customer {
+    private String name;
+    private double balance;
+
+    public Customer(String name, double balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public String getName() { return name; }
+    public double getBalance() { return balance; }
+
+    public void buyBook(Book book) {
+        if (balance >= book.getPrice()) {
+            balance -= book.getPrice();
+            System.out.println(name + " 고객이 \"" + book.getTitle() + "\" 도서를 구매하였습니다.");
+        } else {
+            System.out.println(name + " 고객은 잔액이 부족하여 \"" + book.getTitle() + "\" 도서를 구매할 수 없습니다.");
+        }
+    }
+}
+```
+
+```java
+// Bookstore.java
+import java.util.ArrayList;
+
+public class Bookstore {
+    private ArrayList<Book> books = new ArrayList<>();
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void listBooks() {
+        System.out.println("📚 서점에 있는 도서 목록:");
+        for (Book book : books) {
+            book.showInfo();
+        }
+    }
+
+    public Book findBook(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+        System.out.println("해당 도서를 찾을 수 없습니다: " + title);
+        return null;
+    }
+
+    public void sellBook(String title, Customer customer) {
+        Book book = findBook(title);
+        if (book != null) {
+            customer.buyBook(book);
+        }
+    }
+}
+```
+
+```java
+// Main.java (실행 예시)
+public class Main {
+    public static void main(String[] args) {
+        Bookstore bookstore = new Bookstore();
+        bookstore.addBook(new Book("자바의 정석", "남궁성", 35000));
+        bookstore.addBook(new Book("Effective Java", "Joshua Bloch", 45000));
+
+        Customer customer = new Customer("홍길동", 40000);
+
+        bookstore.listBooks();
+        bookstore.sellBook("자바의 정석", customer);  // 구매 성공
+        bookstore.sellBook("Effective Java", customer);  // 구매 실패 (잔액 부족)
+    }
+}
+```
+
+---
+
+이 구조를 바탕으로 기능을 확장하거나 GUI로 발전시킬 수도 있어요! 혹시 여기에 재고 관리나 할인 기능도 넣고 싶으신가요? 😊
