@@ -1,7 +1,7 @@
 # SQL 인잭션 보안
 > 코드는 Spring Data JPA에서 **사용자 정의 쿼리**를 작성할 때 사용하는 `@Query` 애너테이션과 **파라미터 바인딩**을 활용한 예제입니다.
 
-https://blog.redraccoon.kr/OWASP-TOP-10/
+https://blog.redraccoon.kr/OWASP-TOP-10-%EC%8B%9C%EB%A6%AC%EC%A6%88-1-Broken-Access-Control/#web-attack---broken-access-control-1
 ---
 
 ## 🔍 코드 분석
